@@ -1,0 +1,25 @@
+# Visual Studio / .NET
+.vs/
+bin/
+obj/
+**/bin/
+**/obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.nuget/
+.vscode/
+# Rider
+.idea/
+# Visual Studio Code workspace
+*.code-workspace
+# Mac
+.DS_Store
+# Logs
+*.log
+# Build outputs
+publish/
+# others
+*.db
+*.bak
