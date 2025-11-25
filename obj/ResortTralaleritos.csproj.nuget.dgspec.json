@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Resort\\ResortTralaleritos\\ResortTralaleritos.csproj": {}
+    "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\ResortTralaleritos.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Resort\\ResortTralaleritos\\ResortTralaleritos.csproj": {
+    "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\ResortTralaleritos.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Resort\\ResortTralaleritos\\ResortTralaleritos.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\ResortTralaleritos.csproj",
         "projectName": "ResortTralaleritos",
-        "projectPath": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Resort\\ResortTralaleritos\\ResortTralaleritos.csproj",
+        "projectPath": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\ResortTralaleritos.csproj",
         "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Resort\\ResortTralaleritos\\obj\\",
+        "outputPath": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

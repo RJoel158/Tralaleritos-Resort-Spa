@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace  ResortTralaleritos.Models
+namespace ResortTralaleritos.Models
 {
     public class Room
     {
@@ -16,9 +16,11 @@ namespace  ResortTralaleritos.Models
         [StringLength(10)]
         public string RoomNumber { get; set; } = string.Empty;
 
+        // Relación con RoomType (FK)
         [Required]
-        [StringLength(50)]
-        public string RoomType { get; set; } = string.Empty;
+        public int RoomTypeId { get; set; }
+
+        public RoomType RoomType { get; set; } = default!;
 
         [StringLength(300)]
         public string? Description { get; set; }
@@ -32,7 +34,6 @@ namespace  ResortTralaleritos.Models
 
         // Precios
         [Column(TypeName = "decimal(10,2)")]
-        [Range(0, 10000)]
         public decimal PricePerNight { get; set; }
 
         // Estado / Disponibilidad
@@ -42,9 +43,6 @@ namespace  ResortTralaleritos.Models
 
         // Servicios Many-to-Many
         public ICollection<Service> Services { get; set; } = new List<Service>();
-
-        // Reservas (1 → muchos)
-        //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
         // Auditoría
         public DateTime CreatedAt { get; set; } = DateTime.Now;
