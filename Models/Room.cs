@@ -40,9 +40,6 @@ namespace  ResortTralaleritos.Models
 
         public RoomStatus Status { get; set; } = RoomStatus.Available;
 
-        // Servicios Many-to-Many
-        public ICollection<Service> Services { get; set; } = new List<Service>();
-
         // Reservas (1 → muchos)
         //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
 
