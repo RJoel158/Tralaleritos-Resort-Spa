@@ -59,6 +59,9 @@ namespace ResortTralaleritos.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int?>("RoomTypeId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -67,7 +70,40 @@ namespace ResortTralaleritos.Migrations
 
                     b.HasKey("RoomId");
 
+                    b.HasIndex("RoomTypeId");
+
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.RoomType", b =>
+                {
+                    b.Property<int>("RoomTypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomTypeId"));
+
+                    b.Property<decimal>("BasePrice")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<int>("DefaultBeds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("DefaultCapacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("RoomTypeId");
+
+                    b.ToTable("RoomTypes");
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.Service", b =>
@@ -99,9 +135,35 @@ namespace ResortTralaleritos.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("RoomTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("ServiceId");
 
+                    b.HasIndex("RoomTypeId");
+
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.RoomType", null)
+                        .WithMany("Rooms")
+                        .HasForeignKey("RoomTypeId");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.Service", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.RoomType", null)
+                        .WithMany("DefaultServices")
+                        .HasForeignKey("RoomTypeId");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.RoomType", b =>
+                {
+                    b.Navigation("DefaultServices");
+
+                    b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
         }

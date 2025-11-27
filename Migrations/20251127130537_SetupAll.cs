@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ResortTralaleritos.Migrations
 {
     /// <inheritdoc />
-    public partial class AddRoomTypes : Migration
+    public partial class SetupAll : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -35,7 +35,7 @@ namespace ResortTralaleritos.Migrations
                     RoomId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RoomNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    RoomTypeId = table.Column<int>(type: "int", nullable: false),
+                    RoomType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: true),
                     Capacity = table.Column<int>(type: "int", nullable: false),
                     Beds = table.Column<int>(type: "int", nullable: false),
@@ -43,7 +43,8 @@ namespace ResortTralaleritos.Migrations
                     IsAvailable = table.Column<bool>(type: "bit", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    RoomTypeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -52,8 +53,7 @@ namespace ResortTralaleritos.Migrations
                         name: "FK_Rooms_RoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
                         principalTable: "RoomTypes",
-                        principalColumn: "RoomTypeId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "RoomTypeId");
                 });
 
             migrationBuilder.CreateTable(
@@ -63,7 +63,11 @@ namespace ResortTralaleritos.Migrations
                     ServiceId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: true),
+                    OpeningTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ClosingTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    BaseCost = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
+                    RegistrationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     RoomTypeId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -76,39 +80,10 @@ namespace ResortTralaleritos.Migrations
                         principalColumn: "RoomTypeId");
                 });
 
-            migrationBuilder.CreateTable(
-                name: "RoomService",
-                columns: table => new
-                {
-                    RoomsRoomId = table.Column<int>(type: "int", nullable: false),
-                    ServicesServiceId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_RoomService", x => new { x.RoomsRoomId, x.ServicesServiceId });
-                    table.ForeignKey(
-                        name: "FK_RoomService_Rooms_RoomsRoomId",
-                        column: x => x.RoomsRoomId,
-                        principalTable: "Rooms",
-                        principalColumn: "RoomId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_RoomService_Services_ServicesServiceId",
-                        column: x => x.ServicesServiceId,
-                        principalTable: "Services",
-                        principalColumn: "ServiceId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Rooms_RoomTypeId",
                 table: "Rooms",
                 column: "RoomTypeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_RoomService_ServicesServiceId",
-                table: "RoomService",
-                column: "ServicesServiceId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Services_RoomTypeId",
@@ -119,9 +94,6 @@ namespace ResortTralaleritos.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "RoomService");
-
             migrationBuilder.DropTable(
                 name: "Rooms");
 

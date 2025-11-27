@@ -12,8 +12,8 @@ using ResortTralaleritos.Data;
 namespace ResortTralaleritos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20251125134853_AddRoomTypes")]
-    partial class AddRoomTypes
+    [Migration("20251127130537_SetupAll")]
+    partial class SetupAll
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -57,7 +57,12 @@ namespace ResortTralaleritos.Migrations
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<int>("RoomTypeId")
+                    b.Property<string>("RoomType")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
 
                     b.Property<int>("Status")
@@ -112,14 +117,26 @@ namespace ResortTralaleritos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"));
 
+                    b.Property<decimal>("BaseCost")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("ClosingTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<DateTime>("OpeningTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
@@ -131,30 +148,11 @@ namespace ResortTralaleritos.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("RoomService", b =>
-                {
-                    b.Property<int>("RoomsRoomId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ServicesServiceId")
-                        .HasColumnType("int");
-
-                    b.HasKey("RoomsRoomId", "ServicesServiceId");
-
-                    b.HasIndex("ServicesServiceId");
-
-                    b.ToTable("RoomService");
-                });
-
             modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
                 {
-                    b.HasOne("ResortTralaleritos.Models.RoomType", "RoomType")
+                    b.HasOne("ResortTralaleritos.Models.RoomType", null)
                         .WithMany("Rooms")
-                        .HasForeignKey("RoomTypeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("RoomType");
+                        .HasForeignKey("RoomTypeId");
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.Service", b =>
@@ -162,21 +160,6 @@ namespace ResortTralaleritos.Migrations
                     b.HasOne("ResortTralaleritos.Models.RoomType", null)
                         .WithMany("DefaultServices")
                         .HasForeignKey("RoomTypeId");
-                });
-
-            modelBuilder.Entity("RoomService", b =>
-                {
-                    b.HasOne("ResortTralaleritos.Models.Room", null)
-                        .WithMany()
-                        .HasForeignKey("RoomsRoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ResortTralaleritos.Models.Service", null)
-                        .WithMany()
-                        .HasForeignKey("ServicesServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.RoomType", b =>
