@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResortTralaleritos.Data;
 
@@ -11,9 +12,11 @@ using ResortTralaleritos.Data;
 namespace ResortTralaleritos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251127031339_AddServiceUpdateMigration")]
+    partial class AddServiceUpdateMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -81,8 +84,8 @@ namespace ResortTralaleritos.Migrations
                     b.Property<decimal>("BaseCost")
                         .HasColumnType("decimal(10,2)");
 
-                    b.Property<DateTime>("ClosingTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("ClosingTime")
+                        .HasColumnType("time");
 
                     b.Property<string>("Description")
                         .HasMaxLength(150)
@@ -93,15 +96,32 @@ namespace ResortTralaleritos.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<DateTime>("OpeningTime")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeOnly>("OpeningTime")
+                        .HasColumnType("time");
 
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("RoomId")
+                        .HasColumnType("int");
+
                     b.HasKey("ServiceId");
 
+                    b.HasIndex("RoomId");
+
                     b.ToTable("Services");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.Service", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.Room", null)
+                        .WithMany("Services")
+                        .HasForeignKey("RoomId");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
+                {
+                    b.Navigation("Services");
                 });
 #pragma warning restore 612, 618
         }
