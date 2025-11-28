@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResortTralaleritos.Data;
 
@@ -11,9 +12,11 @@ using ResortTralaleritos.Data;
 namespace ResortTralaleritos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251125134853_AddRoomTypes")]
+    partial class AddRoomTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,31 +112,17 @@ namespace ResortTralaleritos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"));
 
-                    b.Property<decimal>("BaseCost")
-                        .HasColumnType("decimal(10,2)");
-
-                    b.Property<DateTime>("ClosingTime")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
-                        .HasMaxLength(150)
-                        .HasColumnType("nvarchar(150)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-<<<<<<< HEAD
-                    b.Property<DateTime>("OpeningTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime2");
-=======
                     b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
->>>>>>> origin/main
 
                     b.HasKey("ServiceId");
 
@@ -141,8 +130,6 @@ namespace ResortTralaleritos.Migrations
 
                     b.ToTable("Services");
                 });
-<<<<<<< HEAD
-=======
 
             modelBuilder.Entity("RoomService", b =>
                 {
@@ -198,7 +185,6 @@ namespace ResortTralaleritos.Migrations
 
                     b.Navigation("Rooms");
                 });
->>>>>>> origin/main
 #pragma warning restore 612, 618
         }
     }

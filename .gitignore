@@ -1,37 +1,94 @@
-# Visual Studio
+############################################################
+# .gitignore - fusión de HEAD y origin/main
+# Contiene reglas comunes para Visual Studio, IDEs, builds
+############################################################
+
+# Visual Studio cache/options directory
 .vs/
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Rider / JetBrains
+/.idea/
+*.sln.iml
+*.iml
+
+# User-specific files
+*.rsuser
 *.suo
 *.user
 *.userosscache
+*.sln.docstates
+*.sln.user
 
-# Build outputs
-bin/
-obj/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr]m/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
 **/bin/
 **/obj/
+
+# Binary / runtime
 *.dll
 *.exe
 *.pdb
 
-# Visual Studio Code
-.vscode/
-
-# Rider
-/.idea/
-
-# npm
-node_modules/
-
-# Logs
+# Logs and build logs
 *.log
-
-# OS files
-Thumbs.db
-.DS_Store
+[Ll]og/
+[Ll]ogs/
 
 # NuGet
 *.nupkg
+*.snupkg
+*.nuget.props
+*.nuget.targets
 project.lock.json
 
-# Resharper
+# ReSharper
 _ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+# VS Code extensions
+*.vsix
+
+# Application settings (keep template, ignore local overrides)
+appsettings.Development.json
+appsettings.Production.json
+appsettings.*.json
+!appsettings.json
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+*.coverage
+
+# Node modules (if using npm/node)
+node_modules/
+
+# Environment and temp
+.env
+.env.local
+*.tmp
+*.temp
+
