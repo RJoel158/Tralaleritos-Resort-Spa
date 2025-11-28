@@ -12,5 +12,6 @@ namespace ResortTralaleritos.Data
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Service> Services { get; set; }
         public DbSet<RoomType> RoomTypes { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

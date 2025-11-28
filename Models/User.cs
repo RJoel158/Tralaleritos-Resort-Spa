@@ -21,7 +21,6 @@ namespace ResortTralaleritos.Models
         [StringLength(30, ErrorMessage = "{0} must be: minimum {2} and maximum {1} characters", MinimumLength = 3)]
         public string? SecondLastName { get; set; }
 
-        [Required(ErrorMessage = "Password is required")]
         [Display(Name = "Password")]
         [StringLength(30, ErrorMessage = "{0} must be: minimum {2} and maximum {1} characters", MinimumLength = 8)]
         [DataType(DataType.Password)]
@@ -32,7 +31,18 @@ namespace ResortTralaleritos.Models
         [StringLength(255, ErrorMessage = "{0} must be: minimum {2} and maximum {1} characters", MinimumLength = 3)]
         public string? Email { get; set; }
 
-        [Required]
-        public bool IsActive { get; set; }
+        [Required(ErrorMessage = "Status is required")]
+        [Display(Name = "Status")]
+        public UserStatus Status { get; set; } = UserStatus.Active;
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Registration Date")]
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
+    }
+
+    public enum UserStatus
+    {
+        Active,
+        Disabled
     }
 }

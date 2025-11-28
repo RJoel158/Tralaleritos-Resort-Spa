@@ -3,56 +3,60 @@
   "WorkspaceRootPath": "E:\\Resort\\Tralaleritos-Resort-Spa\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:controllers\\roomscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\reservationdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\reservationdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\rooms\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\rooms\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:controllers\\userscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\rooms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\rooms\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\roomtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\roomtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:controllers\\servicescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\controllers\\roomtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:controllers\\roomtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\users\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\roomtypes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\roomtypes\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\roomtypes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\roomtypes\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\roomtypes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\roomtypes\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\roomtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\roomtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\views\\services\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\services\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\service.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\controllers\\roomtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:controllers\\roomtypescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\reservation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|e:\\resort\\tralaleritos-resort-spa\\models\\reservationdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\reservationdetail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,7 +66,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
@@ -72,7 +76,7 @@
               "RelativeDocumentMoniker": "Models\\Room.cs",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\Room.cs",
               "RelativeToolTip": "Models\\Room.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAIwCwAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAA+wCUAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T01:14:51.145Z",
               "IsPinned": true,
@@ -80,13 +84,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "RoomType.cs",
               "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\RoomType.cs",
               "RelativeDocumentMoniker": "Models\\RoomType.cs",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\RoomType.cs",
               "RelativeToolTip": "Models\\RoomType.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAwwBUAAAAwAAAAAAAAAA==",
+              "ViewState": "AgIAABAAAAAAAAAAAAAowCAAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T01:38:09.328Z",
               "IsPinned": true,
@@ -94,13 +98,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 10,
               "Title": "Service.cs",
               "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\Service.cs",
               "RelativeDocumentMoniker": "Models\\Service.cs",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\Service.cs",
               "RelativeToolTip": "Models\\Service.cs",
-              "ViewState": "AgIAAAoAAAAAAAAAAAAgwCUAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAAkwCcAAABGAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-27T14:31:46.752Z",
               "IsPinned": true,
@@ -108,13 +112,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 8,
               "Title": "User.cs",
               "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\User.cs",
               "RelativeToolTip": "Models\\User.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAQwAoAAAAgAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwC4AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T04:01:00.676Z",
               "IsPinned": true,
@@ -122,13 +126,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 12,
               "Title": "Reservation.cs",
               "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\Reservation.cs",
               "RelativeDocumentMoniker": "Models\\Reservation.cs",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\Reservation.cs",
               "RelativeToolTip": "Models\\Reservation.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBgAAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAYwBsAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T03:47:03.15Z",
               "IsPinned": true,
@@ -136,13 +140,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 13,
               "Title": "ReservationDetail.cs",
               "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\ReservationDetail.cs",
               "RelativeDocumentMoniker": "Models\\ReservationDetail.cs",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Models\\ReservationDetail.cs",
               "RelativeToolTip": "Models\\ReservationDetail.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA5wCcAAAA1AAAAAAAAAA==",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwCcAAAA1AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T04:01:42.589Z",
               "IsPinned": true,
@@ -150,30 +154,57 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ServicesController.cs",
-              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\ServicesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ServicesController.cs",
-              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\ServicesController.cs",
-              "RelativeToolTip": "Controllers\\ServicesController.cs",
-              "ViewState": "AgIAAFQAAAAAAAAAAAAmwG4AAABAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-27T03:37:50.606Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "RoomTypesController.cs",
               "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\RoomTypesController.cs",
               "RelativeDocumentMoniker": "Controllers\\RoomTypesController.cs",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\RoomTypesController.cs",
               "RelativeToolTip": "Controllers\\RoomTypesController.cs",
-              "ViewState": "AgIAAE4AAAAAAAAAAAAmwHIAAABHAAAAAAAAAA==",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAmwGoAAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-28T03:25:25.48Z",
               "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UsersController.cs",
+              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\UsersController.cs",
+              "RelativeDocumentMoniker": "Controllers\\UsersController.cs",
+              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\UsersController.cs",
+              "RelativeToolTip": "Controllers\\UsersController.cs",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAswF8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T23:09:37.911Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RoomsController.cs",
+              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\RoomsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\RoomsController.cs",
+              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Controllers\\RoomsController.cs",
+              "RelativeToolTip": "Controllers\\RoomsController.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAAAwwHkAAAAyAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T23:25:10.547Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\Rooms\\Edit.cshtml",
+              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Edit.cshtml",
+              "RelativeToolTip": "Views\\Rooms\\Edit.cshtml",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAADkAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T23:28:00.636Z",
               "EditorCaption": ""
             },
             {
@@ -186,67 +217,54 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\RoomTypes\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\RoomTypes\\Index.cshtml",
-              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\RoomTypes\\Index.cshtml",
-              "RelativeToolTip": "Views\\RoomTypes\\Index.cshtml",
-              "ViewState": "AgIAACcAAAAAAAAAAAAAAEEAAABRAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-28T03:42:40.081Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Edit.cshtml",
-              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\RoomTypes\\Edit.cshtml",
-              "RelativeDocumentMoniker": "Views\\RoomTypes\\Edit.cshtml",
-              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\RoomTypes\\Edit.cshtml",
-              "RelativeToolTip": "Views\\RoomTypes\\Edit.cshtml",
-              "ViewState": "AgIAABsAAAAAAAAAAAAAADEAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-28T03:33:07.548Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 4,
               "Title": "Create.cshtml",
-              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\RoomTypes\\Create.cshtml",
-              "RelativeDocumentMoniker": "Views\\RoomTypes\\Create.cshtml",
-              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\RoomTypes\\Create.cshtml",
-              "RelativeToolTip": "Views\\RoomTypes\\Create.cshtml",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAADAAAAAVAAAAAAAAAA==",
+              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Rooms\\Create.cshtml",
+              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Create.cshtml",
+              "RelativeToolTip": "Views\\Rooms\\Create.cshtml",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAACEAAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-28T03:32:56.097Z",
+              "WhenOpened": "2025-11-28T23:26:08.936Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 5,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Users\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Users\\Create.cshtml",
+              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Users\\Create.cshtml",
+              "RelativeToolTip": "Views\\Users\\Create.cshtml",
+              "ViewState": "AgIAAB4AAAAAAAAAAAAAADEAAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-11-28T23:17:28.712Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
               "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AgIAAA0BAAAAAAAAAAAQwCkBAAAdAAAAAAAAAA==",
+              "ViewState": "AgIAABkBAAAAAAAAAAAQwDEBAAB5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-28T02:42:58.133Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Services\\Index.cshtml",
-              "RelativeDocumentMoniker": "Views\\Services\\Index.cshtml",
-              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Views\\Services\\Index.cshtml",
-              "RelativeToolTip": "Views\\Services\\Index.cshtml",
-              "ViewState": "AgIAAB4AAAAAAAAAAAAAAD4AAABlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-11-27T03:52:42.536Z",
+              "DocumentIndex": 7,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "E:\\Resort\\Tralaleritos-Resort-Spa\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "E:\\Resort\\Tralaleritos-Resort-Spa\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-28T22:01:12.944Z",
               "EditorCaption": ""
             }
           ]

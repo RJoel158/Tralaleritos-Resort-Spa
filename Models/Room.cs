@@ -25,10 +25,6 @@ namespace ResortTralaleritos.Models
         [Column(TypeName = "decimal(10,2)")]
         public decimal PricePerNight { get; set; }
 
-        [Required(ErrorMessage = "Availability is required")]
-        [Display(Name = "Availability")]
-        public bool IsAvailable { get; set; }
-
         [Required(ErrorMessage = "Status is required")]
         [Display(Name = "Status")]
         public RoomStatus Status { get; set; } = RoomStatus.Available;
@@ -45,7 +41,6 @@ namespace ResortTralaleritos.Models
         [Display(Name = "Room Type")]
         public int RoomTypeId { get; set; }
 
-        [Required]
         public RoomType? RoomType { get; set; }
 
         //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
