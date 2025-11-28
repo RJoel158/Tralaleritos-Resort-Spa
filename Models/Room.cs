@@ -11,42 +11,44 @@ namespace ResortTralaleritos.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoomId { get; set; }
 
-        // Información básica
-        [Required]
+        [Required(ErrorMessage = "Room number is required")]
+        [Display(Name = "Room Number")]
         [StringLength(10)]
-        public string RoomNumber { get; set; } = string.Empty;
+        public string? RoomNumber { get; set; }
 
-        // Relación con RoomType (FK)
-        [Required]
-        public int RoomTypeId { get; set; }
-
-        public RoomType RoomType { get; set; } = default!;
-
+        [Display(Name = "Description")]
         [StringLength(300)]
         public string? Description { get; set; }
 
-        // Capacidades
-        [Range(1, 10)]
-        public int Capacity { get; set; }
-
-        [Range(0, 10)]
-        public int Beds { get; set; }
-
-        // Precios
+        [Required(ErrorMessage = "Price per night is required")]
+        [Display(Name = "Price Per Night")]
         [Column(TypeName = "decimal(10,2)")]
         public decimal PricePerNight { get; set; }
 
-        // Estado / Disponibilidad
-        public bool IsAvailable { get; set; } = true;
+        [Required(ErrorMessage = "Availability is required")]
+        [Display(Name = "Availability")]
+        public bool IsAvailable { get; set; }
 
+        [Required(ErrorMessage = "Status is required")]
+        [Display(Name = "Status")]
         public RoomStatus Status { get; set; } = RoomStatus.Available;
 
-        // Reservas (1 → muchos)
-        //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+        [DataType(DataType.Date)]
+        [Display(Name = "Registration Date")]
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
+        
+        [DataType(DataType.Date)]
+        [Display(Name = "Update Date")]
+        public DateTime? UpdateDate { get; set; }
 
-        // Auditoría
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime? UpdatedAt { get; set; }
+        [Required(ErrorMessage = "Room type is required")]
+        [Display(Name = "Room Type")]
+        public int RoomTypeId { get; set; }
+
+        [Required]
+        public RoomType? RoomType { get; set; }
+
+        //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 
     public enum RoomStatus

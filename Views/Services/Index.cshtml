@@ -4,12 +4,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<div class="header">
+    <h1>Services</h1>
+    <p>Manage all the active services</p>
+</div>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn-nuevo">Create New</a>
 </p>
-<table class="table">
+<table class="table-container">
     <thead>
         <tr>
             <th>
@@ -43,21 +46,21 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td> *@
             <td>
-                @Html.DisplayFor(modelItem => item.OpeningTime)
+                <strong>@Html.DisplayFor(modelItem => item.OpeningTime)</strong>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.ClosingTime)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.BaseCost)
+                <strong>@Html.DisplayFor(modelItem => item.BaseCost)</strong>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.RegistrationDate)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.ServiceId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ServiceId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ServiceId">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.ServiceId" class="btn-editar">Edit</a> 
+                <a asp-action="Details" asp-route-id="@item.ServiceId" class="btn-detalles">Details</a> 
+                <a asp-action="Delete" asp-route-id="@item.ServiceId" class="btn-eliminar">Delete</a>
             </td>
         </tr>
 }

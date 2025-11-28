@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResortTralaleritos.Data;
 
@@ -11,9 +12,11 @@ using ResortTralaleritos.Data;
 namespace ResortTralaleritos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251128014346_AddMainFixMigration")]
+    partial class AddMainFixMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +33,15 @@ namespace ResortTralaleritos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
 
+                    b.Property<int>("Beds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
@@ -39,9 +51,6 @@ namespace ResortTralaleritos.Migrations
 
                     b.Property<decimal>("PricePerNight")
                         .HasColumnType("decimal(10,2)");
-
-                    b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<string>("RoomNumber")
                         .IsRequired()
@@ -54,7 +63,7 @@ namespace ResortTralaleritos.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdateDate")
+                    b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("RoomId");
@@ -87,14 +96,8 @@ namespace ResortTralaleritos.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(30)
-                        .HasColumnType("nvarchar(30)");
-
-                    b.Property<DateTime>("RegistrationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime2");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("RoomTypeId");
 
@@ -130,7 +133,12 @@ namespace ResortTralaleritos.Migrations
                     b.Property<DateTime>("RegistrationDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("RoomTypeId")
+                        .HasColumnType("int");
+
                     b.HasKey("ServiceId");
+
+                    b.HasIndex("RoomTypeId");
 
                     b.ToTable("Services");
                 });
@@ -146,8 +154,17 @@ namespace ResortTralaleritos.Migrations
                     b.Navigation("RoomType");
                 });
 
+            modelBuilder.Entity("ResortTralaleritos.Models.Service", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.RoomType", null)
+                        .WithMany("DefaultServices")
+                        .HasForeignKey("RoomTypeId");
+                });
+
             modelBuilder.Entity("ResortTralaleritos.Models.RoomType", b =>
                 {
+                    b.Navigation("DefaultServices");
+
                     b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618

@@ -11,8 +11,8 @@ namespace ResortTralaleritos.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "RoomService");
+            // Evitar excepción si la tabla ya fue eliminada por otra migración
+            migrationBuilder.Sql("IF OBJECT_ID('dbo.RoomService','U') IS NOT NULL DROP TABLE [RoomService];");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Description",

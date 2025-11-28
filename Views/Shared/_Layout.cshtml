@@ -7,6 +7,280 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ResortTralaleritos.styles.css" asp-append-version="true" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #FFFDF7;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #FEC43E;
+        }
+
+            .header h1 {
+                color: #710013;
+                font-size: 32px;
+                margin-bottom: 5px;
+            }
+
+            .header p {
+                color: #8A1A22;
+                font-size: 14px;
+            }
+
+        /* Controles superiores */
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+        }
+
+            .search-box input {
+                width: 100%;
+                padding: 10px 15px;
+                background-color: #FFFDF7;
+                border: 2px solid #710013;
+                border-radius: 5px;
+                color: #710013;
+                font-size: 14px;
+                transition: border-color 0.3s;
+            }
+
+                .search-box input::placeholder {
+                    color: #8A1A22;
+                }
+
+                .search-box input:focus {
+                    outline: none;
+                    border-color: #FEC43E;
+                }
+
+        .btn-nuevo {
+            padding: 12px 25px;
+            background-color: #FEC43E;
+            color: #710013;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+            .btn-nuevo:hover {
+                background-color: #FFD76A;
+                color: #710013;
+            }
+
+        /* Filtros */
+        .filters {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            background-color: #FFFDF7;
+            color: #710013;
+            border: 2px solid #FCDF9B;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+            .filter-btn:hover,
+            .filter-btn.active {
+                background-color: #FCDF9B;
+                border-color: #710013;
+            }
+
+        /* Tabla */
+        .table-container {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(113, 0, 19, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background-color: #FCDF9B;
+        }
+
+            thead th {
+                padding: 15px;
+                text-align: left;
+                color: #710013;
+                font-weight: 600;
+                font-size: 14px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+            }
+
+        tbody tr {
+            border-bottom: 1px solid #FCDF9B;
+            transition: background-color 0.2s;
+        }
+
+            tbody tr:nth-child(even) {
+                background-color: #FFFDF7;
+            }
+
+            tbody tr:nth-child(odd) {
+                background-color: #FFF8E8;
+            }
+
+            tbody tr:hover {
+                background-color: #FFD76A;
+            }
+
+        tbody td {
+            padding: 15px;
+            color: #710013;
+            font-size: 14px;
+        }
+
+        .descripcion {
+            color: #8A1A22;
+            font-size: 13px;
+        }
+
+        /* Estados */
+        .estado {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+            .estado.activo {
+                background-color: #2E7D32;
+                color: white;
+            }
+
+            .estado.inactivo {
+                background-color: #B5A7A7;
+                color: white;
+            }
+
+            .estado.expirado {
+                background-color: #710013;
+                color: white;
+            }
+
+            .estado.proximo {
+                background-color: #FFD76A;
+                color: #710013;
+            }
+
+        /* Botones de acción */
+        .acciones {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-editar,
+        .btn-detalles,
+        .btn-eliminar {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-editar {
+            background-color: #FEC43E;
+            color: #710013;
+        }
+
+            .btn-editar:hover {
+                background-color: #FFD76A;
+                color: #710013;
+            }
+
+        .btn-detalles {
+            background-color: #FCDF9B;
+            color: #710013;
+        }
+
+            .btn-detalles:hover {
+                background-color: #FFD76A;
+                color: #710013;
+            }
+
+        .btn-eliminar {
+            background-color: #710013;
+            color: white;
+        }
+
+            .btn-eliminar:hover {
+                background-color: #4A000C;
+                color: white;
+            }
+
+        .porcentaje {
+            font-weight: 700;
+            font-size: 16px;
+            color: #710013;
+        }
+
+        /* Responsive */
+        @@media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .table-container {
+                overflow-x: auto;
+            }
+
+            table {
+                min-width: 800px;
+            }
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -21,9 +295,6 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Rooms" asp-action="Index">Rooms</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Services" asp-action="Index">Services</a>
