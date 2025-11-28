@@ -1,0 +1,37 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+
+# Build outputs
+bin/
+obj/
+**/bin/
+**/obj/
+*.dll
+*.exe
+*.pdb
+
+# Visual Studio Code
+.vscode/
+
+# Rider
+/.idea/
+
+# npm
+node_modules/
+
+# Logs
+*.log
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# NuGet
+*.nupkg
+project.lock.json
+
+# Resharper
+_ReSharper*/
