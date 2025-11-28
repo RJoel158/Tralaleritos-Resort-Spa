@@ -41,8 +41,13 @@ namespace ResortTralaleritos.Models
 
         public RoomStatus Status { get; set; } = RoomStatus.Available;
 
+<<<<<<< HEAD
         // Servicios Many-to-Many
         public ICollection<Service> Services { get; set; } = new List<Service>();
+=======
+        // Reservas (1 → muchos)
+        //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
+>>>>>>> b9514022094f3261247eab2ec0bd043164ebba24
 
         // Auditoría
         public DateTime CreatedAt { get; set; } = DateTime.Now;

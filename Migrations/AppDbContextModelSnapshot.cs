@@ -109,17 +109,31 @@ namespace ResortTralaleritos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"));
 
+                    b.Property<decimal>("BaseCost")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("ClosingTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+<<<<<<< HEAD
                     b.Property<int?>("RoomTypeId")
                         .HasColumnType("int");
+=======
+                    b.Property<DateTime>("OpeningTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+>>>>>>> b9514022094f3261247eab2ec0bd043164ebba24
 
                     b.HasKey("ServiceId");
 
@@ -127,6 +141,7 @@ namespace ResortTralaleritos.Migrations
 
                     b.ToTable("Services");
                 });
+<<<<<<< HEAD
 
             modelBuilder.Entity("RoomService", b =>
                 {
@@ -182,6 +197,8 @@ namespace ResortTralaleritos.Migrations
 
                     b.Navigation("Rooms");
                 });
+=======
+>>>>>>> b9514022094f3261247eab2ec0bd043164ebba24
 #pragma warning restore 612, 618
         }
     }

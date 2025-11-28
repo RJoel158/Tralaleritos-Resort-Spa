@@ -15,8 +15,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
-            <th>
+            @* <th>
                 @Html.DisplayNameFor(model => model.Description)
+            </th> *@
+            <th>
+                @Html.DisplayNameFor(model => model.OpeningTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ClosingTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BaseCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
             </th>
             <th></th>
         </tr>
@@ -27,8 +39,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
-            <td>
+            @* <td>
                 @Html.DisplayFor(modelItem => item.Description)
+            </td> *@
+            <td>
+                @Html.DisplayFor(modelItem => item.OpeningTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ClosingTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BaseCost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ServiceId">Edit</a> |
