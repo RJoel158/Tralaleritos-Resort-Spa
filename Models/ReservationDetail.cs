@@ -29,14 +29,12 @@ namespace ResortTralaleritos.Models
         [Display(Name = "Room")]
         public int RoomId { get; set; }
 
-        [Required]
         public Room? Room { get; set; }
 
         [Required(ErrorMessage = "Reservation is required")]
         [Display(Name = "Reservation")]
         public int ReservationId { get; set; }
 
-        [Required]
         public Reservation? Reservation { get; set; }
     }
 }

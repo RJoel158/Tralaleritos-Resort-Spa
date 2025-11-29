@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ResortTralaleritos.Data;
 
@@ -11,9 +12,11 @@ using ResortTralaleritos.Data;
 namespace ResortTralaleritos.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251128234342_AddReservationMigration")]
+    partial class AddReservationMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,12 +32,6 @@ namespace ResortTralaleritos.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CheckInDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("CheckOutDate")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
@@ -60,19 +57,39 @@ namespace ResortTralaleritos.Migrations
                     b.ToTable("Reservations");
                 });
 
-            modelBuilder.Entity("ResortTralaleritos.Models.ReservationRoom", b =>
+            modelBuilder.Entity("ResortTralaleritos.Models.ReservationDetail", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CheckInDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOutDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("NumberOfGuests")
+                        .HasColumnType("int");
+
                     b.Property<int>("ReservationId")
                         .HasColumnType("int");
 
                     b.Property<int>("RoomId")
                         .HasColumnType("int");
 
-                    b.HasKey("ReservationId", "RoomId");
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("ReservationRooms");
+                    b.ToTable("ReservationDetail");
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
@@ -238,16 +255,16 @@ namespace ResortTralaleritos.Migrations
                     b.Navigation("Client");
                 });
 
-            modelBuilder.Entity("ResortTralaleritos.Models.ReservationRoom", b =>
+            modelBuilder.Entity("ResortTralaleritos.Models.ReservationDetail", b =>
                 {
                     b.HasOne("ResortTralaleritos.Models.Reservation", "Reservation")
-                        .WithMany("ReservationRooms")
+                        .WithMany("Details")
                         .HasForeignKey("ReservationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ResortTralaleritos.Models.Room", "Room")
-                        .WithMany("ReservationRooms")
+                        .WithMany()
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -270,12 +287,7 @@ namespace ResortTralaleritos.Migrations
 
             modelBuilder.Entity("ResortTralaleritos.Models.Reservation", b =>
                 {
-                    b.Navigation("ReservationRooms");
-                });
-
-            modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
-                {
-                    b.Navigation("ReservationRooms");
+                    b.Navigation("Details");
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.RoomType", b =>

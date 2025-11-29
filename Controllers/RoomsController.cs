@@ -91,7 +91,7 @@ namespace ResortTralaleritos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoomId,RoomNumber,Description,PricePerNight,Status,RoomTypeId")] Room room)
+        public async Task<IActionResult> Edit(int id, [Bind("RoomId,RoomNumber,Description,PricePerNight,Status,UpdateDate,RoomTypeId")] Room room)
         {
             if (id != room.RoomId)
             {

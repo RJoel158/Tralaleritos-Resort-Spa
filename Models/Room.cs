@@ -43,6 +43,8 @@ namespace ResortTralaleritos.Models
 
         public RoomType? RoomType { get; set; }
 
+        public ICollection<ReservationRoom> ReservationRooms { get; set; } = new List<ReservationRoom>();
+
         //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }
 
