@@ -68,7 +68,7 @@ namespace ResortTralaleritos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Code,CheckInDate,CheckOutDate,Status,ClientId")] Reservation reservation, int RoomId)
+        public async Task<IActionResult> Create([Bind("Id,Code,CheckInDate,CheckOutDate,ClientId")] Reservation reservation, int RoomId)
         {
             if (ModelState.IsValid)
             {
@@ -116,8 +116,8 @@ namespace ResortTralaleritos.Controllers
                     };
                     _context.ReservationRooms.Add(reservationRoom);
 
-                    // Cambiar el estado de la habitación a Occupied
-                    room.Status = RoomStatus.Occupied;
+                    // Cambiar el estado de la habitación a Reserved (reserva hecha, pendiente de check-in)
+                    room.Status = RoomStatus.Reserved;
                     room.UpdateDate = DateTime.Now;
                     _context.Update(room);
 
@@ -170,13 +170,15 @@ namespace ResortTralaleritos.Controllers
             {
                 return NotFound();
             }
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Obtener el registro original desde la base de datos
-                    var existingReservation = await _context.Reservations.FindAsync(id);
+                    // Obtener el registro original desde la base de datos con habitaciones
+                    var existingReservation = await _context.Reservations
+                        .Include(r => r.ReservationRooms)
+                            .ThenInclude(rr => rr.Room)
+                        .FirstOrDefaultAsync(r => r.Id == id);
 
                     if (existingReservation == null)
                         return NotFound();
@@ -185,15 +187,46 @@ namespace ResortTralaleritos.Controllers
                     existingReservation.Code = reservation.Code;
                     existingReservation.CheckInDate = reservation.CheckInDate;
                     existingReservation.CheckOutDate = reservation.CheckOutDate;
+                    var previousStatus = existingReservation.Status;
                     existingReservation.Status = reservation.Status;
                     existingReservation.UpdateDate = DateTime.Now;
                     existingReservation.ClientId = reservation.ClientId;
 
-                    // NO actualizar RegistrationDate
-                    // existingService.RegistrationDate permanece igual
+                    // Actualizar estados de habitaciones según el nuevo estado de la reserva
+                    using var transaction = await _context.Database.BeginTransactionAsync();
+                    try
+                    {
+                        foreach (var rr in existingReservation.ReservationRooms)
+                        {
+                            var room = rr.Room;
+                            if (room == null) continue;
 
-                    _context.Update(existingReservation);
-                    await _context.SaveChangesAsync();
+                            if (existingReservation.Status == ReservationStatus.Active)
+                            {
+                                room.Status = RoomStatus.Occupied;
+                            }
+                            else if (existingReservation.Status == ReservationStatus.Pending)
+                            {
+                                room.Status = RoomStatus.Reserved;
+                            }
+                            else if (existingReservation.Status == ReservationStatus.Disabled)
+                            {
+                                room.Status = RoomStatus.Available;
+                            }
+
+                            room.UpdateDate = DateTime.Now;
+                            _context.Update(room);
+                        }
+
+                        _context.Update(existingReservation);
+                        await _context.SaveChangesAsync();
+                        await transaction.CommitAsync();
+                    }
+                    catch
+                    {
+                        await transaction.RollbackAsync();
+                        throw;
+                    }
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -236,13 +269,41 @@ namespace ResortTralaleritos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var reservation = await _context.Reservations.FindAsync(id);
+            var reservation = await _context.Reservations
+                .Include(r => r.ReservationRooms)
+                    .ThenInclude(rr => rr.Room)
+                .FirstOrDefaultAsync(r => r.Id == id);
+
             if (reservation != null)
             {
-                _context.Reservations.Remove(reservation);
+                // Usar transacción para garantizar consistencia
+                using var transaction = await _context.Database.BeginTransactionAsync();
+                try
+                {
+                    // Cambiar estado de las habitaciones a Available
+                    foreach (var reservationRoom in reservation.ReservationRooms)
+                    {
+                        if (reservationRoom.Room != null)
+                        {
+                            reservationRoom.Room.Status = RoomStatus.Available;
+                            reservationRoom.Room.UpdateDate = DateTime.Now;
+                            _context.Update(reservationRoom.Room);
+                        }
+                    }
+
+                    // Eliminar la reserva (las ReservationRooms se eliminan en cascada)
+                    _context.Reservations.Remove(reservation);
+
+                    await _context.SaveChangesAsync();
+                    await transaction.CommitAsync();
+                }
+                catch
+                {
+                    await transaction.RollbackAsync();
+                    throw;
+                }
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
