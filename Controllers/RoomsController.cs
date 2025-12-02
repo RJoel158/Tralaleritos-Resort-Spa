@@ -7,22 +7,66 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ResortTralaleritos.Data;
 using ResortTralaleritos.Models;
+using ResortTralaleritos.Services;
 
 namespace ResortTralaleritos.Controllers
 {
     public class RoomsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IRoomService _roomService;
 
-        public RoomsController(AppDbContext context)
+        public RoomsController(AppDbContext context, IRoomService roomService)
         {
             _context = context;
+            _roomService = roomService;
         }
 
         // GET: Rooms
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Rooms.ToListAsync());
+            // Redirigir al método de búsqueda con filtros por defecto
+            return RedirectToAction(nameof(Search));
+        }
+
+        /// <summary>
+        /// GET: Rooms/Search
+        /// Implementa CU-HABITACION-03: Permite buscar habitaciones con filtros avanzados
+        /// </summary>
+        public async Task<IActionResult> Search(string? roomNumber, string? roomType, RoomStatus? status, 
+            decimal? minPrice, decimal? maxPrice, int? minCapacity, bool? isAvailable, 
+            int pageNumber = 1, string sortBy = "RoomNumber", bool sortDescending = false)
+        {
+            var filter = new RoomFilterDto
+            {
+                RoomNumber = roomNumber,
+                RoomType = roomType,
+                Status = status,
+                MinPrice = minPrice,
+                MaxPrice = maxPrice,
+                MinCapacity = minCapacity,
+                IsAvailable = isAvailable,
+                PageNumber = pageNumber,
+                SortBy = sortBy,
+                SortDescending = sortDescending
+            };
+
+            var (rooms, totalCount) = await _roomService.SearchRoomsAsync(filter);
+
+            // Preparar data para la vista
+            var roomTypes = await _context.RoomTypes.Select(rt => rt.Name).Distinct().ToListAsync();
+            ViewBag.RoomTypes = new SelectList(roomTypes, selectedValue: roomType);
+            ViewBag.Statuses = Enum.GetValues(typeof(RoomStatus))
+                .Cast<RoomStatus>()
+                .ToList();
+
+            // Guardar filtros actuales en ViewBag para mantener en la vista
+            ViewBag.CurrentFilter = filter;
+            ViewBag.TotalCount = totalCount;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)filter.PageSize);
+            ViewBag.CurrentPage = pageNumber;
+
+            return View(rooms);
         }
 
         // GET: Rooms/Details/5
@@ -58,9 +102,17 @@ namespace ResortTralaleritos.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(room);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var currentUser = User?.Identity?.Name ?? "Sistema";
+                    var createdRoom = await _roomService.CreateRoomAsync(room, currentUser);
+                    TempData["SuccessMessage"] = "Habitación creada exitosamente";
+                    return RedirectToAction(nameof(Search));
+                }
+                catch (ArgumentException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
+                }
             }
             return View(room);
         }
@@ -97,8 +149,18 @@ namespace ResortTralaleritos.Controllers
             {
                 try
                 {
-                    _context.Update(room);
-                    await _context.SaveChangesAsync();
+                    // Obtener el usuario actual (podría mejorarse con autenticación)
+                    var currentUser = User?.Identity?.Name ?? "Sistema";
+                    
+                    // Usar el servicio para actualizar y registrar auditoría
+                    var updatedRoom = await _roomService.UpdateRoomAsync(id, room, currentUser);
+                    
+                    TempData["SuccessMessage"] = "Habitación actualizada exitosamente";
+                    return RedirectToAction(nameof(Search));
+                }
+                catch (ArgumentException ex)
+                {
+                    ModelState.AddModelError("", ex.Message);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -111,7 +173,6 @@ namespace ResortTralaleritos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(room);
         }
@@ -152,6 +213,29 @@ namespace ResortTralaleritos.Controllers
         private bool RoomExists(int id)
         {
             return _context.Rooms.Any(e => e.RoomId == id);
+        }
+
+        /// <summary>
+        /// GET: Rooms/AuditHistory/5
+        /// Muestra el historial de auditoría de una habitación
+        /// </summary>
+        public async Task<IActionResult> AuditHistory(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var room = await _roomService.GetRoomByIdAsync(id.Value);
+            if (room == null)
+            {
+                return NotFound();
+            }
+
+            var auditLogs = await _roomService.GetRoomAuditHistoryAsync(id.Value);
+            
+            ViewBag.Room = room;
+            return View(auditLogs);
         }
     }
 }

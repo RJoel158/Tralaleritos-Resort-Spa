@@ -1,78 +1,128 @@
 ﻿@model ResortTralaleritos.Models.Room
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles de la Habitación";
 }
 
-<h1>Details</h1>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h4 class="mb-0">Detalles de la Habitación #@Model.RoomNumber</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Número de Habitación</h6>
+                            <p class="h5">@Model.RoomNumber</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Tipo</h6>
+                            <p class="h5">@Model.RoomType</p>
+                        </div>
+                    </div>
 
-<div>
-    <h4>Room</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RoomNumber)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RoomNumber)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RoomType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RoomType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Capacity)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Capacity)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Beds)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Beds)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PricePerNight)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PricePerNight)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.IsAvailable)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.IsAvailable)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-    </dl>
+                    <div class="mb-3">
+                        <h6 class="text-muted">Descripción</h6>
+                        <p>@(Model.Description ?? "Sin descripción")</p>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <h6 class="text-muted">Capacidad</h6>
+                            <p class="h5">@Model.Capacity personas</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-muted">Camas</h6>
+                            <p class="h5">@Model.Beds cama(s)</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h6 class="text-muted">Precio por Noche</h6>
+                            <p class="h5">${@Model.PricePerNight}</p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Estado</h6>
+                            <p>
+                                <span class="badge bg-@GetStatusBadgeColor(Model.Status)">
+                                    @Model.Status
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-muted">Disponibilidad</h6>
+                            <p>
+                                @if (Model.IsAvailable)
+                                {
+                                    <span class="badge bg-success">Disponible</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">No Disponible</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <small class="text-muted">
+                                <strong>Creado:</strong> @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                                @if (!string.IsNullOrEmpty(Model.CreatedBy))
+                                {
+                                    <span>por @Model.CreatedBy</span>
+                                }
+                            </small>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            @if (Model.UpdatedAt.HasValue)
+                            {
+                                <small class="text-muted">
+                                    <strong>Modificado:</strong> @Model.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm")
+                                    @if (!string.IsNullOrEmpty(Model.ModifiedBy))
+                                    {
+                                        <span>por @Model.ModifiedBy</span>
+                                    }
+                                </small>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-3">
+                <a href="@Url.Action("Edit", "Rooms", new { id = Model.RoomId })" class="btn btn-warning">
+                    <i class="bi bi-pencil"></i> Editar
+                </a>
+                <a href="@Url.Action("AuditHistory", "Rooms", new { id = Model.RoomId })" class="btn btn-secondary">
+                    <i class="bi bi-clock-history"></i> Historial
+                </a>
+                <a href="@Url.Action("Search", "Rooms")" class="btn btn-info">
+                    <i class="bi bi-search"></i> Volver a Búsqueda
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.RoomId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+@functions {
+    private string GetStatusBadgeColor(ResortTralaleritos.Models.RoomStatus status)
+    {
+        return status switch
+        {
+            ResortTralaleritos.Models.RoomStatus.Available => "success",
+            ResortTralaleritos.Models.RoomStatus.Occupied => "danger",
+            ResortTralaleritos.Models.RoomStatus.Cleaning => "warning",
+            ResortTralaleritos.Models.RoomStatus.Maintenance => "secondary",
+            ResortTralaleritos.Models.RoomStatus.Reserved => "info",
+            _ => "light"
+        };
+    }
+}

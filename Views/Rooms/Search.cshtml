@@ -1,0 +1,279 @@
+@model IEnumerable<ResortTralaleritos.Models.Room>
+
+@{
+    ViewData["Title"] = "Buscar y Modificar Habitaciones";
+    var filter = ViewBag.CurrentFilter as ResortTralaleritos.Models.RoomFilterDto ?? new ResortTralaleritos.Models.RoomFilterDto();
+    var totalPages = ViewBag.TotalPages ?? 1;
+    var currentPage = ViewBag.CurrentPage ?? 1;
+    var totalCount = ViewBag.TotalCount ?? 0;
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="mb-4">Buscar y Modificar Habitaciones</h1>
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    @TempData["SuccessMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Panel de Filtros -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Filtros de Búsqueda</h5>
+                </div>
+                <div class="card-body">
+                    <form method="get" action="@Url.Action("Search", "Rooms")" class="row g-3">
+                        <!-- Número de Habitación -->
+                        <div class="col-md-3">
+                            <label for="roomNumber" class="form-label">Número de Habitación</label>
+                            <input type="text" class="form-control" id="roomNumber" name="roomNumber" 
+                                   value="@filter.RoomNumber" placeholder="Ej: 101">
+                        </div>
+
+                        <!-- Tipo de Habitación -->
+                        <div class="col-md-3">
+                            <label for="roomType" class="form-label">Tipo de Habitación</label>
+                            <select class="form-select" id="roomType" name="roomType" asp-items="ViewBag.RoomTypes">
+                                <option value="">-- Seleccionar --</option>
+                            </select>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="col-md-3">
+                            <label for="status" class="form-label">Estado</label>
+                            <select class="form-select" id="status" name="status">
+                                <option value="">-- Seleccionar --</option>
+                                @if (ViewBag.Statuses != null)
+                                {
+                                    @foreach (var s in ViewBag.Statuses)
+                                    {
+                                        <option value="@s" selected="@(filter.Status?.ToString() == s.ToString())">@s</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Disponibilidad -->
+                        <div class="col-md-3">
+                            <label for="isAvailable" class="form-label">Disponibilidad</label>
+                            <select class="form-select" id="isAvailable" name="isAvailable">
+                                <option value="">-- Seleccionar --</option>
+                                <option value="true" selected="@(filter.IsAvailable == true)">Disponible</option>
+                                <option value="false" selected="@(filter.IsAvailable == false)">No Disponible</option>
+                            </select>
+                        </div>
+
+                        <!-- Precio Mínimo -->
+                        <div class="col-md-2">
+                            <label for="minPrice" class="form-label">Precio Mínimo</label>
+                            <input type="number" class="form-control" id="minPrice" name="minPrice" 
+                                   value="@filter.MinPrice" placeholder="0" step="0.01">
+                        </div>
+
+                        <!-- Precio Máximo -->
+                        <div class="col-md-2">
+                            <label for="maxPrice" class="form-label">Precio Máximo</label>
+                            <input type="number" class="form-control" id="maxPrice" name="maxPrice" 
+                                   value="@filter.MaxPrice" placeholder="10000" step="0.01">
+                        </div>
+
+                        <!-- Capacidad Mínima -->
+                        <div class="col-md-2">
+                            <label for="minCapacity" class="form-label">Capacidad Mínima</label>
+                            <input type="number" class="form-control" id="minCapacity" name="minCapacity" 
+                                   value="@filter.MinCapacity" placeholder="1" min="1" max="10">
+                        </div>
+
+                        <!-- Ordenamiento -->
+                        <div class="col-md-2">
+                            <label for="sortBy" class="form-label">Ordenar Por</label>
+                            <select class="form-select" id="sortBy" name="sortBy">
+                                <option value="RoomNumber" selected="@(filter.SortBy == "RoomNumber")">Número</option>
+                                <option value="price" selected="@(filter.SortBy == "price")">Precio</option>
+                                <option value="capacity" selected="@(filter.SortBy == "capacity")">Capacidad</option>
+                            </select>
+                        </div>
+
+                        <!-- Dirección del Ordenamiento -->
+                        <div class="col-md-2">
+                            <label for="sortDescending" class="form-label">Dirección</label>
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="sortDescending" name="sortDescending" 
+                                       value="true" @(filter.SortDescending ? "checked" : "")>
+                                <label class="form-check-label" for="sortDescending">
+                                    Descendente
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-search"></i> Buscar
+                            </button>
+                            <a href="@Url.Action("Search", "Rooms")" class="btn btn-secondary">
+                                <i class="bi bi-arrow-counterclockwise"></i> Limpiar Filtros
+                            </a>
+                            <a href="@Url.Action("Create", "Rooms")" class="btn btn-success float-end">
+                                <i class="bi bi-plus-circle"></i> Nueva Habitación
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resultados -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        Resultados: <strong>@totalCount</strong> habitación(es) encontrada(s)
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="table-dark">
+                                    <tr>
+                                        <th>Número</th>
+                                        <th>Tipo</th>
+                                        <th>Precio/Noche</th>
+                                        <th>Capacidad</th>
+                                        <th>Camas</th>
+                                        <th>Estado</th>
+                                        <th>Disponible</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var room in Model)
+                                    {
+                                        <tr>
+                                            <td>@room.RoomNumber</td>
+                                            <td>@room.RoomType</td>
+                                            <td>${@room.PricePerNight}</td>
+                                            <td>@room.Capacity</td>
+                                            <td>@room.Beds</td>
+                                            <td>
+                                                <span class="badge bg-@GetStatusBadgeColor(room.Status)">
+                                                    @room.Status
+                                                </span>
+                                            </td>
+                                            <td>
+                                                @if (room.IsAvailable)
+                                                {
+                                                    <span class="badge bg-success">Sí</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger">No</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Edit", "Rooms", new { id = room.RoomId })" 
+                                                   class="btn btn-sm btn-warning" title="Editar">
+                                                    <i class="bi bi-pencil"></i>
+                                                </a>
+                                                <a href="@Url.Action("Details", "Rooms", new { id = room.RoomId })" 
+                                                   class="btn btn-sm btn-info" title="Detalles">
+                                                    <i class="bi bi-eye"></i>
+                                                </a>
+                                                <a href="@Url.Action("AuditHistory", "Rooms", new { id = room.RoomId })" 
+                                                   class="btn btn-sm btn-secondary" title="Historial">
+                                                    <i class="bi bi-clock-history"></i>
+                                                </a>
+                                                <a href="@Url.Action("Delete", "Rooms", new { id = room.RoomId })" 
+                                                   class="btn btn-sm btn-danger" title="Eliminar">
+                                                    <i class="bi bi-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <!-- Paginación -->
+                        @if (totalPages > 1)
+                        {
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center">
+                                    @if (currentPage > 1)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@Url.Action("Search", "Rooms", 
+                                               new { pageNumber = currentPage - 1 })">
+                                                Anterior
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @for (int i = 1; i <= totalPages; i++)
+                                    {
+                                        <li class="page-item @(i == currentPage ? "active" : "")">
+                                            <a class="page-link" href="@Url.Action("Search", "Rooms", 
+                                               new { pageNumber = i })">
+                                                @i
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @if (currentPage < totalPages)
+                                    {
+                                        <li class="page-item">
+                                            <a class="page-link" href="@Url.Action("Search", "Rooms", 
+                                               new { pageNumber = currentPage + 1 })">
+                                                Siguiente
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </nav>
+                        }
+                    }
+                    else
+                    {
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle"></i> No se encontraron habitaciones con los filtros seleccionados.
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+@functions {
+    private string GetStatusBadgeColor(ResortTralaleritos.Models.RoomStatus status)
+    {
+        return status switch
+        {
+            ResortTralaleritos.Models.RoomStatus.Available => "success",
+            ResortTralaleritos.Models.RoomStatus.Occupied => "danger",
+            ResortTralaleritos.Models.RoomStatus.Cleaning => "warning",
+            ResortTralaleritos.Models.RoomStatus.Maintenance => "secondary",
+            ResortTralaleritos.Models.RoomStatus.Reserved => "info",
+            _ => "light"
+        };
+    }
+}

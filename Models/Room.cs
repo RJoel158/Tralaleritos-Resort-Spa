@@ -46,6 +46,15 @@ namespace  ResortTralaleritos.Models
         // Auditoría
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime? UpdatedAt { get; set; }
+
+        [StringLength(100)]
+        public string? CreatedBy { get; set; }
+
+        [StringLength(100)]
+        public string? ModifiedBy { get; set; }
+
+        // Relación con el historial de auditoría
+        public virtual ICollection<RoomAuditLog> AuditLogs { get; set; } = new List<RoomAuditLog>();
     }
 
     public enum RoomStatus

@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using ResortTralaleritos.Data;
+using ResortTralaleritos.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+// Register services
+builder.Services.AddScoped<IRoomService, RoomService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

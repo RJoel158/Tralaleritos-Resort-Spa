@@ -1,77 +1,188 @@
 ﻿@model ResortTralaleritos.Models.Room
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Habitación";
 }
 
-<h1>Edit</h1>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Modificar Habitación #@Model.RoomNumber</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Edit" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+                        
+                        <input type="hidden" asp-for="RoomId" />
+                        <input type="hidden" asp-for="CreatedAt" />
+                        <input type="hidden" asp-for="CreatedBy" />
 
-<h4>Room</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="RoomId" />
-            <div class="form-group">
-                <label asp-for="RoomNumber" class="control-label"></label>
-                <input asp-for="RoomNumber" class="form-control" />
-                <span asp-validation-for="RoomNumber" class="text-danger"></span>
+                        <!-- Información Básica -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="RoomNumber" class="form-label fw-bold">Número de Habitación</label>
+                                <input asp-for="RoomNumber" class="form-control" placeholder="Ej: 101" />
+                                <span asp-validation-for="RoomNumber" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="RoomType" class="form-label fw-bold">Tipo de Habitación</label>
+                                <input asp-for="RoomType" class="form-control" placeholder="Ej: Estándar, Suite, Deluxe" />
+                                <span asp-validation-for="RoomType" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <!-- Descripción -->
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label fw-bold">Descripción</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Describe las características de la habitación"></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Capacidad y Camas -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Capacity" class="form-label fw-bold">Capacidad de Personas</label>
+                                <input asp-for="Capacity" type="number" class="form-control" min="1" max="10" />
+                                <span asp-validation-for="Capacity" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="Beds" class="form-label fw-bold">Número de Camas</label>
+                                <input asp-for="Beds" type="number" class="form-control" min="0" max="10" />
+                                <span asp-validation-for="Beds" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <!-- Precio -->
+                        <div class="mb-3">
+                            <label asp-for="PricePerNight" class="form-label fw-bold">Precio por Noche ($)</label>
+                            <input asp-for="PricePerNight" type="number" class="form-control" step="0.01" min="0" />
+                            <span asp-validation-for="PricePerNight" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Estado y Disponibilidad -->
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="Status" class="form-label fw-bold">Estado</label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="">-- Seleccionar --</option>
+                                    <option value="0">Disponible</option>
+                                    <option value="1">Ocupada</option>
+                                    <option value="2">Limpieza</option>
+                                    <option value="3">Mantenimiento</option>
+                                    <option value="4">Reservada</option>
+                                </select>
+                                <span asp-validation-for="Status" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="form-label fw-bold">Disponibilidad</label>
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" asp-for="IsAvailable" id="isAvailable" />
+                                        <label class="form-check-label" for="isAvailable">
+                                            Disponible para reservas
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Información de Auditoría (solo lectura) -->
+                        <hr class="my-4" />
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <small class="text-muted">
+                                    <strong>Creado:</strong> @Model.CreatedAt.ToString("dd/MM/yyyy HH:mm")
+                                    @if (!string.IsNullOrEmpty(Model.CreatedBy))
+                                    {
+                                        <span>por @Model.CreatedBy</span>
+                                    }
+                                </small>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                @if (Model.UpdatedAt.HasValue)
+                                {
+                                    <small class="text-muted">
+                                        <strong>Última actualización:</strong> @Model.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm")
+                                        @if (!string.IsNullOrEmpty(Model.ModifiedBy))
+                                        {
+                                            <span>por @Model.ModifiedBy</span>
+                                        }
+                                    </small>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Botones -->
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="bi bi-check-circle"></i> Guardar Cambios
+                            </button>
+                            <a href="@Url.Action("Search", "Rooms")" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="RoomType" class="control-label"></label>
-                <input asp-for="RoomType" class="form-control" />
-                <span asp-validation-for="RoomType" class="text-danger"></span>
+
+            <!-- Información sobre validaciones -->
+            <div class="alert alert-info mt-3" role="alert">
+                <h5 class="alert-heading">
+                    <i class="bi bi-info-circle"></i> Validaciones
+                </h5>
+                <ul class="mb-0">
+                    <li>El número de habitación debe ser único y entre 1 y 10 caracteres.</li>
+                    <li>El precio no puede ser negativo.</li>
+                    <li>La capacidad debe estar entre 1 y 10 personas.</li>
+                    <li>El tipo de habitación debe corresponder a una categoría registrada.</li>
+                </ul>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <!-- Panel Lateral -->
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Acciones</h5>
+                </div>
+                <div class="list-group list-group-flush">
+                    <a href="@Url.Action("Details", "Rooms", new { id = Model.RoomId })" class="list-group-item list-group-item-action">
+                        <i class="bi bi-eye"></i> Ver Detalles
+                    </a>
+                    <a href="@Url.Action("AuditHistory", "Rooms", new { id = Model.RoomId })" class="list-group-item list-group-item-action">
+                        <i class="bi bi-clock-history"></i> Historial de Cambios
+                    </a>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Capacity" class="control-label"></label>
-                <input asp-for="Capacity" class="form-control" />
-                <span asp-validation-for="Capacity" class="text-danger"></span>
+
+            <div class="card">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">Información</h5>
+                </div>
+                <div class="card-body">
+                    <p class="mb-2">
+                        <strong>ID:</strong> <br />
+                        <small class="text-muted">@Model.RoomId</small>
+                    </p>
+                    <p class="mb-0">
+                        <strong>Última Modificación:</strong> <br />
+                        <small class="text-muted">
+                            @if (Model.UpdatedAt.HasValue)
+                            {
+                                @Model.UpdatedAt.Value.ToString("dd/MM/yyyy HH:mm:ss")
+                            }
+                            else
+                            {
+                                <span>Nunca modificada</span>
+                            }
+                        </small>
+                    </p>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Beds" class="control-label"></label>
-                <input asp-for="Beds" class="form-control" />
-                <span asp-validation-for="Beds" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PricePerNight" class="control-label"></label>
-                <input asp-for="PricePerNight" class="form-control" />
-                <span asp-validation-for="PricePerNight" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsAvailable" /> @Html.DisplayNameFor(model => model.IsAvailable)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <select asp-for="Status" class="form-control"></select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedAt" class="control-label"></label>
-                <input asp-for="UpdatedAt" class="form-control" />
-                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -1,56 +1,64 @@
 ﻿@model ResortTralaleritos.Models.Service
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Crear Nuevo Servicio";
 }
 
-<h1>Create</h1>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Crear Nuevo Servicio</h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Create" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-<h4>Service</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label fw-bold">Nombre del Servicio</label>
+                            <input asp-for="Name" class="form-control" placeholder="Ej: Spa, Restaurante" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description" class="form-label fw-bold">Descripción</label>
+                            <textarea asp-for="Description" class="form-control" rows="3" placeholder="Describe el servicio"></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="OpeningTime" class="form-label fw-bold">Hora de Apertura</label>
+                                <input asp-for="OpeningTime" class="form-control" type="datetime-local" />
+                                <span asp-validation-for="OpeningTime" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="ClosingTime" class="form-label fw-bold">Hora de Cierre</label>
+                                <input asp-for="ClosingTime" class="form-control" type="datetime-local" />
+                                <span asp-validation-for="ClosingTime" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BaseCost" class="form-label fw-bold">Costo Base ($)</label>
+                            <input asp-for="BaseCost" class="form-control" type="number" step="0.01" min="0" />
+                            <span asp-validation-for="BaseCost" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle"></i> Crear Servicio
+                            </button>
+                            <a href="@Url.Action("Index", "Services")" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="OpeningTime" class="control-label"></label>
-                <input asp-for="OpeningTime" class="form-control" />
-                <span asp-validation-for="OpeningTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ClosingTime" class="control-label"></label>
-                <input asp-for="ClosingTime" class="form-control" />
-                <span asp-validation-for="ClosingTime" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="BaseCost" class="control-label"></label>
-                <input asp-for="BaseCost" class="form-control" />
-                <span asp-validation-for="BaseCost" class="text-danger"></span>
-            </div>
-            @* <div class="form-group">
-                <label asp-for="RegistrationDate" class="control-label"></label>
-                <input asp-for="RegistrationDate" class="form-control" />
-                <span asp-validation-for="RegistrationDate" class="text-danger"></span>
-            </div> *@
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

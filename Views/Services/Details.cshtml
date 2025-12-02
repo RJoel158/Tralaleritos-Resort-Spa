@@ -1,54 +1,71 @@
 ﻿@model ResortTralaleritos.Models.Service
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles del Servicio";
 }
 
-<h1>Details</h1>
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle"></i> Detalles del Servicio: <strong>@Model?.Name</strong>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <p class="text-muted">Nombre</p>
+                            <h5>@Model?.Name</h5>
+                        </div>
+                    </div>
 
-<div>
-    <h4>Service</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Description)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Description)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.OpeningTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.OpeningTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ClosingTime)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ClosingTime)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.BaseCost)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.BaseCost)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RegistrationDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RegistrationDate)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.ServiceId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <p class="text-muted">Descripción</p>
+                            <p class="bg-light p-2">@Model?.Description</p>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-4">
+                            <p class="text-muted">Hora de Apertura</p>
+                            <h5>
+                                <span class="badge bg-primary">@Model?.OpeningTime.ToString(@"hh\:mm")</span>
+                            </h5>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-muted">Hora de Cierre</p>
+                            <h5>
+                                <span class="badge bg-danger">@Model?.ClosingTime.ToString(@"hh\:mm")</span>
+                            </h5>
+                        </div>
+                        <div class="col-md-4">
+                            <p class="text-muted">Costo Base</p>
+                            <h5>
+                                <span class="badge bg-success">${@Model?.BaseCost}</span>
+                            </h5>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <p class="text-muted">Fecha de Registro</p>
+                            <p class="fw-bold">@Model?.RegistrationDate.ToString("g")</p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <a asp-action="Edit" asp-route-id="@Model?.ServiceId" class="btn btn-warning">
+                            <i class="bi bi-pencil"></i> Editar
+                        </a>
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Volver
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
