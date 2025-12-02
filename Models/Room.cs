@@ -25,7 +25,7 @@ namespace ResortTralaleritos.Models
         [StringLength(300)]
         public string? Description { get; set; }
 
-        // Capacidades
+        // Capacidades de casas
         [Range(1, 10)]
         public int Capacity { get; set; }
 
