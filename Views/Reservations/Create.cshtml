@@ -24,12 +24,12 @@
             </div>
             <div class="form-group">
                 <label asp-for="CheckInDate" class="control-label"></label>
-                <input asp-for="CheckInDate" class="form-control" />
+                <input asp-for="CheckInDate" class="form-control" id="checkInDate" type="date" />
                 <span asp-validation-for="CheckInDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="CheckOutDate" class="control-label"></label>
-                <input asp-for="CheckOutDate" class="form-control" />
+                <input asp-for="CheckOutDate" class="form-control" id="checkOutDate" type="date" />
                 <span asp-validation-for="CheckOutDate" class="text-danger"></span>
             </div>
             @* <div class="form-group">
@@ -53,10 +53,10 @@
             </div>
             <div class="form-group">
                 <label for="RoomId" class="control-label">Room</label>
-                <select name="RoomId" class="form-control" asp-items="ViewBag.RoomId">
-                    <option value="">-- Select a Room --</option>
+                <select name="RoomId" id="roomSelect" class="form-control">
+                    <option value="">-- Select Check-In and Check-Out dates first --</option>
                 </select>
-                <span class="text-danger" asp-validation-for="ClientId"></span>
+                <span id="roomError" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-guardar" />
@@ -68,4 +68,78 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Función para cargar habitaciones disponibles según las fechas
+            function loadAvailableRooms() {
+                var checkInDate = $('#checkInDate').val();
+                var checkOutDate = $('#checkOutDate').val();
+                var roomSelect = $('#roomSelect');
+                var roomError = $('#roomError');
+
+                // Limpiar mensajes de error
+                roomError.text('');
+
+                // Validar que ambas fechas estén seleccionadas
+                if (!checkInDate || !checkOutDate) {
+                    roomSelect.html('<option value="">-- Select Check-In and Check-Out dates first --</option>');
+                    roomSelect.prop('disabled', true);
+                    return;
+                }
+
+                // Validar que checkOut sea posterior a checkIn
+                if (checkInDate >= checkOutDate) {
+                    roomSelect.html('<option value="">-- Check-Out must be after Check-In --</option>');
+                    roomSelect.prop('disabled', true);
+                    roomError.text('Check-Out date must be after Check-In date.');
+                    return;
+                }
+
+                // Hacer petición AJAX para obtener habitaciones disponibles
+                $.ajax({
+                    url: '@Url.Action("GetAvailableRooms", "Reservations")',
+                    type: 'GET',
+                    data: {
+                        checkInDate: checkInDate,
+                        checkOutDate: checkOutDate
+                    },
+                    success: function(response) {
+                        roomSelect.prop('disabled', false);
+                        
+                        if (response.success) {
+                            roomSelect.html('<option value="">-- Select a Room --</option>');
+                            
+                            if (response.rooms.length === 0) {
+                                roomSelect.html('<option value="">-- No rooms available for these dates --</option>');
+                                roomSelect.prop('disabled', true);
+                                roomError.text('No hay habitaciones disponibles en el rango de fechas seleccionado.');
+                            } else {
+                                $.each(response.rooms, function(index, room) {
+                                    roomSelect.append($('<option></option>')
+                                        .attr('value', room.roomId)
+                                        .text(room.roomNumber));
+                                });
+                            }
+                        } else {
+                            roomSelect.html('<option value="">-- Error loading rooms --</option>');
+                            roomSelect.prop('disabled', true);
+                            roomError.text(response.message || 'Error al cargar habitaciones.');
+                        }
+                    },
+                    error: function() {
+                        roomSelect.html('<option value="">-- Error loading rooms --</option>');
+                        roomSelect.prop('disabled', true);
+                        roomError.text('Error al comunicarse con el servidor.');
+                    }
+                });
+            }
+
+            // Cargar habitaciones cuando cambien las fechas
+            $('#checkInDate, #checkOutDate').on('change', loadAvailableRooms);
+
+            // Deshabilitar el select de habitaciones al inicio
+            $('#roomSelect').prop('disabled', true);
+        });
+    </script>
 }

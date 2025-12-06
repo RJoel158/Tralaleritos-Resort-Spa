@@ -28,6 +28,7 @@ namespace ResortTralaleritos.Models
 
         [Required(ErrorMessage = "Email is required")]
         [Display(Name = "Email")]
+        [DataType(DataType.EmailAddress)]
         [StringLength(255, ErrorMessage = "{0} must be: minimum {2} and maximum {1} characters", MinimumLength = 3)]
         public string? Email { get; set; }
 

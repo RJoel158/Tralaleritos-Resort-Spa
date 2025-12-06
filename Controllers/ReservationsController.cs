@@ -54,13 +54,39 @@ namespace ResortTralaleritos.Controllers
         public IActionResult Create()
         {
             ViewData["ClientId"] = new SelectList(_context.Users, "Id", "Email");
-            // Cargar solo habitaciones disponibles
-            ViewData["RoomId"] = new SelectList(
-                _context.Rooms.Where(r => r.Status == RoomStatus.Available),
-                "RoomId",
-                "RoomNumber"
-            );
+            // No cargar habitaciones inicialmente, se cargarán dinámicamente según fechas
             return View();
+        }
+
+        // API: Obtener habitaciones disponibles según rango de fechas
+        [HttpGet]
+        public async Task<JsonResult> GetAvailableRooms(DateTime checkInDate, DateTime checkOutDate)
+        {
+            if (checkInDate >= checkOutDate)
+            {
+                return Json(new { success = false, message = "Fechas inválidas" });
+            }
+
+            // Obtener IDs de habitaciones que tienen reservas activas o pendientes que se solapan con las fechas
+            var occupiedRoomIds = await _context.ReservationRooms
+                .Include(rr => rr.Reservation)
+                .Where(rr => (rr.Reservation.Status == ReservationStatus.Active || 
+                              rr.Reservation.Status == ReservationStatus.Pending) &&
+                             rr.Reservation.CheckInDate < checkOutDate &&
+                             checkInDate < rr.Reservation.CheckOutDate)
+                .Select(rr => rr.RoomId)
+                .Distinct()
+                .ToListAsync();
+
+            // Obtener TODAS las habitaciones que NO tengan conflictos de fechas
+            // (independientemente de su estado actual, porque podrían estar ocupadas HOY pero libres en fechas futuras)
+            var availableRooms = await _context.Rooms
+                .Where(r => !occupiedRoomIds.Contains(r.RoomId))
+                .Select(r => new { r.RoomId, r.RoomNumber })
+                .OrderBy(r => r.RoomNumber)
+                .ToListAsync();
+
+            return Json(new { success = true, rooms = availableRooms });
         }
 
         // POST: Reservations/Create
@@ -72,31 +98,38 @@ namespace ResortTralaleritos.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Validar que la habitación existe y está disponible
+                // Validar fechas
+                if (reservation.CheckInDate >= reservation.CheckOutDate)
+                {
+                    ModelState.AddModelError("CheckOutDate", "La fecha de Check-Out debe ser posterior a la fecha de Check-In.");
+                    ViewData["ClientId"] = new SelectList(_context.Users, "Id", "Email", reservation.ClientId);
+                    return View(reservation);
+                }
+
+                // Validar que la habitación existe
                 var room = await _context.Rooms.FindAsync(RoomId);
                 if (room == null)
                 {
                     ModelState.AddModelError("RoomId", "La habitación seleccionada no existe.");
                     ViewData["ClientId"] = new SelectList(_context.Users, "Id", "Email", reservation.ClientId);
-                    ViewData["RoomId"] = new SelectList(
-                        _context.Rooms.Where(r => r.Status == RoomStatus.Available),
-                        "RoomId",
-                        "RoomNumber",
-                        RoomId
-                    );
                     return View(reservation);
                 }
 
-                if (room.Status != RoomStatus.Available)
+                // Validar solapamiento de fechas con otras reservas activas o pendientes
+                var hasConflict = await _context.ReservationRooms
+                    .Include(rr => rr.Reservation)
+                    .Where(rr => rr.RoomId == RoomId &&
+                                 (rr.Reservation.Status == ReservationStatus.Active || 
+                                  rr.Reservation.Status == ReservationStatus.Pending) &&
+                                 rr.Reservation.CheckInDate < reservation.CheckOutDate &&
+                                 reservation.CheckInDate < rr.Reservation.CheckOutDate)
+                    .AnyAsync();
+
+                if (hasConflict)
                 {
-                    ModelState.AddModelError("RoomId", "La habitación seleccionada no está disponible.");
+                    ModelState.AddModelError("CheckInDate", 
+                        $"La habitación {room.RoomNumber} ya tiene una reserva activa o pendiente en el rango de fechas seleccionado. Por favor, elija otras fechas o una habitación diferente.");
                     ViewData["ClientId"] = new SelectList(_context.Users, "Id", "Email", reservation.ClientId);
-                    ViewData["RoomId"] = new SelectList(
-                        _context.Rooms.Where(r => r.Status == RoomStatus.Available),
-                        "RoomId",
-                        "RoomNumber",
-                        RoomId
-                    );
                     return View(reservation);
                 }
 
@@ -104,6 +137,10 @@ namespace ResortTralaleritos.Controllers
                 using var transaction = await _context.Database.BeginTransactionAsync();
                 try
                 {
+                    // Establecer valores por defecto
+                    reservation.RegistrationDate = DateTime.Now;
+                    reservation.Status = ReservationStatus.Pending;
+
                     // Guardar la reservación
                     _context.Add(reservation);
                     await _context.SaveChangesAsync();
@@ -116,10 +153,15 @@ namespace ResortTralaleritos.Controllers
                     };
                     _context.ReservationRooms.Add(reservationRoom);
 
-                    // Cambiar el estado de la habitación a Reserved (reserva hecha, pendiente de check-in)
-                    room.Status = RoomStatus.Reserved;
-                    room.UpdateDate = DateTime.Now;
-                    _context.Update(room);
+                    // Cambiar el estado de la habitación SOLO si es la próxima reserva para esa habitación
+                    // Si la habitación está Available, la ponemos Reserved
+                    // Si está Occupied o Reserved por otra reserva actual, la dejamos así (esta es una reserva futura)
+                    if (room.Status == RoomStatus.Available)
+                    {
+                        room.Status = RoomStatus.Reserved;
+                        room.UpdateDate = DateTime.Now;
+                        _context.Update(room);
+                    }
 
                     await _context.SaveChangesAsync();
                     await transaction.CommitAsync();
@@ -211,7 +253,25 @@ namespace ResortTralaleritos.Controllers
                             }
                             else if (existingReservation.Status == ReservationStatus.Disabled)
                             {
-                                room.Status = RoomStatus.Available;
+                                // Al desactivar, verificar si hay reservas futuras pendientes para esta habitación
+                                var hasFutureReservation = await _context.ReservationRooms
+                                    .Include(r => r.Reservation)
+                                    .Where(r => r.RoomId == room.RoomId &&
+                                               r.Reservation.Status == ReservationStatus.Pending &&
+                                               r.Reservation.CheckInDate >= DateTime.Today)
+                                    .OrderBy(r => r.Reservation.CheckInDate)
+                                    .AnyAsync();
+
+                                if (hasFutureReservation)
+                                {
+                                    // Si hay reserva futura pendiente, marcar como Reserved
+                                    room.Status = RoomStatus.Reserved;
+                                }
+                                else
+                                {
+                                    // Si no hay reservas futuras, marcar como Available
+                                    room.Status = RoomStatus.Available;
+                                }
                             }
 
                             room.UpdateDate = DateTime.Now;
