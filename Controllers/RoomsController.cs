@@ -88,17 +88,19 @@ namespace ResortTralaleritos.Controllers
         }
 
         // GET: Rooms/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            var roomTypes = await _context.RoomTypes.ToListAsync();
+            ViewBag.RoomTypes = new SelectList(roomTypes, "RoomTypeId", "Name");
             return View();
         }
 
         // POST: Rooms/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see http://go.microsoft.com/fxlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoomId,RoomNumber,RoomType,Description,Capacity,Beds,PricePerNight,IsAvailable,Status,CreatedAt,UpdatedAt")] Room room)
+        public async Task<IActionResult> Create([Bind("RoomId,RoomNumber,RoomTypeId,Description,Capacity,Beds,PricePerNight,IsAvailable,Status,CreatedAt,UpdatedAt")] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -114,6 +116,8 @@ namespace ResortTralaleritos.Controllers
                     ModelState.AddModelError("", ex.Message);
                 }
             }
+            var roomTypes = await _context.RoomTypes.ToListAsync();
+            ViewBag.RoomTypes = new SelectList(roomTypes, "RoomTypeId", "Name");
             return View(room);
         }
 
@@ -130,15 +134,17 @@ namespace ResortTralaleritos.Controllers
             {
                 return NotFound();
             }
+            var roomTypes = await _context.RoomTypes.ToListAsync();
+            ViewBag.RoomTypes = new SelectList(roomTypes, "RoomTypeId", "Name", room.RoomTypeId);
             return View(room);
         }
 
         // POST: Rooms/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // For more details, see http://go.microsoft.com/fxlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoomId,RoomNumber,RoomType,Description,Capacity,Beds,PricePerNight,IsAvailable,Status,CreatedAt,UpdatedAt")] Room room)
+        public async Task<IActionResult> Edit(int id, [Bind("RoomId,RoomNumber,RoomTypeId,Description,Capacity,Beds,PricePerNight,IsAvailable,Status,CreatedAt,UpdatedAt")] Room room)
         {
             if (id != room.RoomId)
             {
@@ -174,6 +180,8 @@ namespace ResortTralaleritos.Controllers
                     }
                 }
             }
+            var roomTypes = await _context.RoomTypes.ToListAsync();
+            ViewBag.RoomTypes = new SelectList(roomTypes, "RoomTypeId", "Name", room.RoomTypeId);
             return View(room);
         }
 

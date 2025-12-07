@@ -27,9 +27,11 @@
                                 <span asp-validation-for="RoomNumber" class="text-danger small"></span>
                             </div>
                             <div class="col-md-6">
-                                <label asp-for="RoomType" class="form-label fw-bold">Tipo de Habitación</label>
-                                <input asp-for="RoomType" class="form-control" placeholder="Ej: Estándar, Suite, Deluxe" />
-                                <span asp-validation-for="RoomType" class="text-danger small"></span>
+                                <label asp-for="RoomTypeId" class="form-label fw-bold">Tipo de Habitación</label>
+                                <select asp-for="RoomTypeId" asp-items="ViewBag.RoomTypes" class="form-select">
+                                    <option value="">-- Seleccionar Tipo de Habitación --</option>
+                                </select>
+                                <span asp-validation-for="RoomTypeId" class="text-danger small"></span>
                             </div>
                         </div>
 

@@ -9,6 +9,7 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 
 // Register services
 builder.Services.AddScoped<IRoomService, RoomService>();
+builder.Services.AddScoped<ICheckInService, CheckInService>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

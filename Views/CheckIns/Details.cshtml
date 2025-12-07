@@ -1,0 +1,139 @@
+@model ResortTralaleritos.Models.CheckIn
+
+@{
+    ViewData["Title"] = "Detalles del Check-In";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-file-earmark-text"></i> Detalles del Check-In
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-person"></i> <strong>Huésped</strong>
+                            </p>
+                            <h5>@Model.Guest.FullName</h5>
+                            <small class="text-muted">ID: @Model.Guest.IdentificationNumber</small>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-door-closed"></i> <strong>Habitación</strong>
+                            </p>
+                            <h5>
+                                <span class="badge bg-warning">@Model.Room?.RoomNumber</span>
+                            </h5>
+                            <small class="text-muted">@Model.Room?.RoomType?.Name</small>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-telephone"></i> <strong>Contacto</strong>
+                            </p>
+                            <p>
+                                <strong>Teléfono:</strong> @Model.Guest.PhoneNumber <br>
+                                <strong>Email:</strong> @Model.Guest.Email
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-calendar-event"></i> <strong>Información de Check-In</strong>
+                            </p>
+                            <p>
+                                <strong>Fecha:</strong> @Model.CheckInDate.ToString("dd/MM/yyyy") <br>
+                                <strong>Hora:</strong> @Model.CheckInTime.ToString(@"hh\:mm")
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-card-text"></i> <strong>Identificación</strong>
+                            </p>
+                            <p>
+                                <strong>@Model.Guest.IdentificationType:</strong> @Model.Guest.IdentificationNumber
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-info-circle"></i> <strong>Estado de Habitación</strong>
+                            </p>
+                            <p>
+                                @if (Model.Room != null)
+                                {
+                                    var statusBadge = Model.Room.Status switch
+                                    {
+                                        RoomStatus.Available => "secondary",
+                                        RoomStatus.Occupied => "danger",
+                                        RoomStatus.Cleaning => "warning",
+                                        RoomStatus.Maintenance => "info",
+                                        RoomStatus.Reserved => "primary",
+                                        _ => "secondary"
+                                    };
+                                    var statusText = Model.Room.Status switch
+                                    {
+                                        RoomStatus.Available => "Disponible",
+                                        RoomStatus.Occupied => "Ocupada",
+                                        RoomStatus.Cleaning => "Limpieza",
+                                        RoomStatus.Maintenance => "Mantenimiento",
+                                        RoomStatus.Reserved => "Reservada",
+                                        _ => "Desconocido"
+                                    };
+                                    <span class="badge bg-@statusBadge">@statusText</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                    @if (!string.IsNullOrWhiteSpace(Model.Notes))
+                    {
+                        <hr>
+                        <div class="mb-4">
+                            <p class="text-muted mb-1">
+                                <i class="bi bi-sticky"></i> <strong>Notas</strong>
+                            </p>
+                            <div class="alert alert-light border">
+                                @Model.Notes
+                            </div>
+                        </div>
+                    }
+
+                    <hr>
+
+                    <div class="row text-muted small">
+                        <div class="col-md-6">
+                            <p>
+                                <strong>Registrado por:</strong> @Model.RegisteredBy <br>
+                                <strong>Fecha de registro:</strong> @Model.SystemRegisteredDate.ToString("dd/MM/yyyy HH:mm:ss")
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p>
+                                <strong>IP de acceso:</strong> @Model.IpAddress
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="d-flex gap-2 mt-4">
+                        <a asp-action="Index" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Volver
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

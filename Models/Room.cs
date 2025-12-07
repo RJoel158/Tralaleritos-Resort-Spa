@@ -16,9 +16,8 @@ namespace  ResortTralaleritos.Models
         [StringLength(10)]
         public string RoomNumber { get; set; } = string.Empty;
 
-        [Required]
-        [StringLength(50)]
-        public string RoomType { get; set; } = string.Empty;
+        [ForeignKey("RoomType")]
+        public int RoomTypeId { get; set; }
 
         [StringLength(300)]
         public string? Description { get; set; }
@@ -52,6 +51,9 @@ namespace  ResortTralaleritos.Models
 
         [StringLength(100)]
         public string? ModifiedBy { get; set; }
+
+        // Relación con RoomType
+        public virtual RoomType? RoomType { get; set; }
 
         // Relación con el historial de auditoría
         public virtual ICollection<RoomAuditLog> AuditLogs { get; set; } = new List<RoomAuditLog>();

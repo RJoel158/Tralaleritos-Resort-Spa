@@ -35,7 +35,7 @@ namespace ResortTralaleritos.Services
         /// </summary>
         public async Task<(List<Room> rooms, int totalCount)> SearchRoomsAsync(RoomFilterDto filter)
         {
-            var query = _context.Rooms.AsQueryable();
+            var query = _context.Rooms.Include(r => r.RoomType).AsQueryable();
 
             // Aplicar filtro por número de habitación
             if (!string.IsNullOrWhiteSpace(filter.RoomNumber))
@@ -46,7 +46,7 @@ namespace ResortTralaleritos.Services
             // Aplicar filtro por tipo de habitación
             if (!string.IsNullOrWhiteSpace(filter.RoomType))
             {
-                query = query.Where(r => r.RoomType == filter.RoomType);
+                query = query.Where(r => r.RoomType != null && r.RoomType.Name.Contains(filter.RoomType));
             }
 
             // Aplicar filtro por estado
@@ -137,10 +137,10 @@ namespace ResortTralaleritos.Services
                     room.RoomNumber, updatedRoom.RoomNumber, ipAddress: ipAddress);
             }
 
-            if (room.RoomType != updatedRoom.RoomType)
+            if (room.RoomTypeId != updatedRoom.RoomTypeId)
             {
-                await LogAuditAsync(roomId, "Update", modifiedBy, nameof(Room.RoomType), 
-                    room.RoomType, updatedRoom.RoomType, ipAddress: ipAddress);
+                await LogAuditAsync(roomId, "Update", modifiedBy, nameof(Room.RoomTypeId), 
+                    room.RoomTypeId.ToString(), updatedRoom.RoomTypeId.ToString(), ipAddress: ipAddress);
             }
 
             if (room.PricePerNight != updatedRoom.PricePerNight)
@@ -250,7 +250,7 @@ namespace ResortTralaleritos.Services
             if (string.IsNullOrWhiteSpace(room.RoomNumber))
                 throw new ArgumentException("El número de habitación es requerido");
 
-            if (string.IsNullOrWhiteSpace(room.RoomType))
+            if (room.RoomTypeId <= 0)
                 throw new ArgumentException("El tipo de habitación es requerido");
 
             if (room.PricePerNight < 0)
@@ -263,10 +263,10 @@ namespace ResortTralaleritos.Services
                 throw new ArgumentException("El número de camas debe estar entre 0 y 10");
 
             // Validar que el tipo de habitación existe
-            var validTypes = _context.RoomTypes.Select(rt => rt.Name).ToList();
-            if (!validTypes.Contains(room.RoomType))
+            var roomTypeExists = _context.RoomTypes.Any(rt => rt.RoomTypeId == room.RoomTypeId);
+            if (!roomTypeExists)
             {
-                throw new ArgumentException($"El tipo de habitación '{room.RoomType}' no es válido");
+                throw new ArgumentException($"El tipo de habitación con ID '{room.RoomTypeId}' no es válido");
             }
         }
     }
