@@ -47,6 +47,8 @@ namespace ResortTralaleritos.Models
 
         //public int? BookingDiscountId { get; set; }
         //public BookingDiscount? BookingDiscount { get; set; }
+
+
     }
 
     public enum ReservationStatus

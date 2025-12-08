@@ -22,6 +22,32 @@ namespace ResortTralaleritos.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ReservationService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ReservationService");
+                });
+
             modelBuilder.Entity("ResortTralaleritos.Models.PaymentRequest", b =>
                 {
                     b.Property<int>("Id")
@@ -284,6 +310,25 @@ namespace ResortTralaleritos.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("ReservationService", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.Reservation", "Reservation")
+                        .WithMany("ReservationServices")
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ResortTralaleritos.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
+
+                    b.Navigation("Service");
+                });
+
             modelBuilder.Entity("ResortTralaleritos.Models.PaymentRequest", b =>
                 {
                     b.HasOne("ResortTralaleritos.Models.Reservation", "Reservation")
@@ -355,6 +400,8 @@ namespace ResortTralaleritos.Migrations
             modelBuilder.Entity("ResortTralaleritos.Models.Reservation", b =>
                 {
                     b.Navigation("ReservationRooms");
+
+                    b.Navigation("ReservationServices");
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
