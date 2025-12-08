@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ResortTralaleritos.Models;
+using YourProjectNamespace.Models;
 
 namespace ResortTralaleritos.Data
 {
@@ -16,6 +17,8 @@ namespace ResortTralaleritos.Data
         public DbSet<Reservation> Reservations { get; set; }
 
         public DbSet<ReservationRoom> ReservationRooms { get; set; }
+        public DbSet<PaymentRequest> PaymentRequests { get; set; }
+        public DbSet<PaymentRequestItem> PaymentRequestItems { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
