@@ -54,7 +54,7 @@ namespace ResortTralaleritos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ServiceId,Name,Description")] Service service)
+        public async Task<IActionResult> Create([Bind("ServiceId,Name,Description,OpeningTime,ClosingTime,BaseCost,RegistrationDate")] Service service)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace ResortTralaleritos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,Name,Description")] Service service)
+        public async Task<IActionResult> Edit(int id, [Bind("ServiceId,Name,Description,OpeningTime,ClosingTime,BaseCost")] Service service)
         {
             if (id != service.ServiceId)
             {
@@ -97,7 +97,23 @@ namespace ResortTralaleritos.Controllers
             {
                 try
                 {
-                    _context.Update(service);
+                    // Obtener el registro original desde la base de datos
+                    var existingService = await _context.Services.FindAsync(id);
+
+                    if (existingService == null)
+                        return NotFound();
+
+                    // Actualizar SOLO los campos que sí deben cambiar
+                    existingService.Name = service.Name;
+                    existingService.Description = service.Description;
+                    existingService.OpeningTime = service.OpeningTime;
+                    existingService.ClosingTime = service.ClosingTime;
+                    existingService.BaseCost = service.BaseCost;
+
+                    // NO actualizar RegistrationDate
+                    // existingService.RegistrationDate permanece igual
+
+                    _context.Update(existingService);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)

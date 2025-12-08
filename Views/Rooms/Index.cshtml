@@ -16,31 +16,22 @@
                 @Html.DisplayNameFor(model => model.RoomNumber)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.RoomType)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Capacity)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Beds)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PricePerNight)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.IsAvailable)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
+                @Html.DisplayNameFor(model => model.RegistrationDate)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomType)
             </th>
             <th></th>
         </tr>
@@ -52,31 +43,22 @@
                 @Html.DisplayFor(modelItem => item.RoomNumber)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.RoomType)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Capacity)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Beds)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PricePerNight)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.IsAvailable)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Status)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomType.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.RoomId">Edit</a> |

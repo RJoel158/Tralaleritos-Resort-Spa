@@ -1,18 +1,7 @@
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
+############################################################
+# .gitignore - fusión de HEAD y origin/main
+# Contiene reglas comunes para Visual Studio, IDEs, builds
+############################################################
 
 # Visual Studio cache/options directory
 .vs/
@@ -20,6 +9,11 @@ bld/
 # Visual Studio Code
 .vscode/
 *.code-workspace
+
+# Rider / JetBrains
+/.idea/
+*.sln.iml
+*.iml
 
 # User-specific files
 *.rsuser
@@ -29,28 +23,43 @@ bld/
 *.sln.docstates
 *.sln.user
 
-# Visual Studio Code directory
-.vscode/
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr]m/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+**/bin/
+**/obj/
+
+# Binary / runtime
+*.dll
+*.exe
+*.pdb
+
+# Logs and build logs
+*.log
+[Ll]og/
+[Ll]ogs/
 
 # NuGet
 *.nupkg
 *.snupkg
 *.nuget.props
 *.nuget.targets
-
-# Rider IDE
-.idea/
-*.sln.iml
-*.iml
+project.lock.json
 
 # ReSharper
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
-
-# JetBrains Rider
-.idea/
-*.sln.iml
 
 # VS Code extensions
 *.vsix
@@ -70,21 +79,16 @@ appsettings.*.json
 .DS_Store
 Thumbs.db
 
-# Runtime files
-*.pdb
-
 # Coverage reports
 coverage/
 *.coverage
 
-# Build logs
-*.log
-
 # Node modules (if using npm/node)
 node_modules/
 
-# Miscellaneous
+# Environment and temp
 .env
 .env.local
 *.tmp
 *.temp
+

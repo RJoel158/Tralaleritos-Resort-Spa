@@ -1,0 +1,90 @@
+﻿@model IEnumerable<ResortTralaleritos.Models.Reservation>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="header">
+    <h1>Reservations</h1>
+    <p>Manage all the active reservations</p>
+</div>
+
+<p>
+    <a asp-action="Create" class="btn-nuevo">Create New</a>
+</p>
+<table class="table-container">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckInDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CheckOutDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegistrationDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UpdateDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Client)
+            </th>
+            <th>
+                Assigned Rooms
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                <strong>@Html.DisplayFor(modelItem => item.Code)</strong>
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckInDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CheckOutDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RegistrationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdateDate)
+            </td>
+            <td>
+                    <strong>@Html.DisplayFor(modelItem => item.Client.Email)</strong>
+            </td>
+            <td>
+                @if (item.ReservationRooms != null && item.ReservationRooms.Any())
+                {
+                    @string.Join(", ", item.ReservationRooms.Select(rr => rr.Room?.RoomNumber))
+                }
+                else
+                {
+                    <span>-</span>
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id" class="btn-editar">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Id" class="btn-detalles">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" class="btn-eliminar">Delete</a>
+                    <a asp-controller="PaymentRequest" asp-action="Generate" asp-route-reservationId="@item.Id" class="btn-detalles">
+                        Payment request
+                    </a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

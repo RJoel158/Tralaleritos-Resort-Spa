@@ -10,29 +10,41 @@ namespace ResortTralaleritos.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int RoomTypeId { get; set; }
 
-        [Required]
-        [StringLength(50)]
-        public string Name { get; set; } = string.Empty; // Ej: Suite, Deluxe
+        [Required(ErrorMessage = "Name is required")]
+        [Display(Name = "Name")]
+        [StringLength(30, ErrorMessage = "{0} must be: minimum {2} and maximum {1} characters", MinimumLength = 3)]
+        [RegularExpression(@"^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+$", ErrorMessage = "Only letters and spaces are allowed.")]
+        public string Name { get; set; } = string.Empty;
 
+        [Display(Name = "Description")]
         [StringLength(300)]
+        [RegularExpression(@"^[A-Za-zÁÉÍÓÚáéíóúÑñÜü\s]+$", ErrorMessage = "Only letters and spaces are allowed.")]
         public string? Description { get; set; }
 
-        // Precio base que heredan las habitaciones
+        [Required(ErrorMessage = "Base price is required")]
+        [Display(Name = "Base Price")]
         [Column(TypeName = "decimal(10,2)")]
         [Range(0, 20000)]
         public decimal BasePrice { get; set; }
 
-        // Sugerencias para UI / configuración
+        [Required(ErrorMessage = "Default Capacity is required")]
+        [Display(Name = "Default Capacity")]
         [Range(1, 10)]
         public int DefaultCapacity { get; set; }
 
+        [Required(ErrorMessage = "Default beds is required")]
+        [Display(Name = "Default Beds")]
         [Range(1, 10)]
         public int DefaultBeds { get; set; }
 
-        // Relación 1 -> muchos (RoomType tiene muchas Rooms)
-        public ICollection<Room> Rooms { get; set; } = new List<Room>();
+        [DataType(DataType.Date)]
+        [Display(Name = "Registration Date")]
+        public DateTime RegistrationDate { get; set; } = DateTime.Now;
 
-        // Servicios recomendados para este tipo (opcional)
-        public ICollection<Service>? DefaultServices { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Update Date")]
+        public DateTime? UpdateDate { get; set; }
+
+        public ICollection<Room> Rooms { get; set; } = new List<Room>();
     }
 }

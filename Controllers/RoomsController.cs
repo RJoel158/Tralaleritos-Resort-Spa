@@ -22,7 +22,8 @@ namespace ResortTralaleritos.Controllers
         // GET: Rooms
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Rooms.ToListAsync());
+            var appDbContext = _context.Rooms.Include(r => r.RoomType);
+            return View(await appDbContext.ToListAsync());
         }
 
         // GET: Rooms/Details/5
@@ -34,6 +35,7 @@ namespace ResortTralaleritos.Controllers
             }
 
             var room = await _context.Rooms
+                .Include(r => r.RoomType)
                 .FirstOrDefaultAsync(m => m.RoomId == id);
             if (room == null)
             {
@@ -46,6 +48,7 @@ namespace ResortTralaleritos.Controllers
         // GET: Rooms/Create
         public IActionResult Create()
         {
+            ViewData["RoomTypeId"] = new SelectList(_context.RoomTypes, "RoomTypeId", "Name");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace ResortTralaleritos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RoomId,RoomNumber,RoomType,Description,Capacity,Beds,PricePerNight,IsAvailable,Status,CreatedAt,UpdatedAt")] Room room)
+        public async Task<IActionResult> Create([Bind("RoomId,RoomNumber,Description,PricePerNight,Status,RoomTypeId")] Room room)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace ResortTralaleritos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["RoomTypeId"] = new SelectList(_context.RoomTypes, "RoomTypeId", "Name", room.RoomTypeId);
             return View(room);
         }
 
@@ -78,6 +82,7 @@ namespace ResortTralaleritos.Controllers
             {
                 return NotFound();
             }
+            ViewData["RoomTypeId"] = new SelectList(_context.RoomTypes, "RoomTypeId", "Name", room.RoomTypeId);
             return View(room);
         }
 
@@ -86,7 +91,7 @@ namespace ResortTralaleritos.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("RoomId,RoomNumber,RoomType,Description,Capacity,Beds,PricePerNight,IsAvailable,Status,CreatedAt,UpdatedAt")] Room room)
+        public async Task<IActionResult> Edit(int id, [Bind("RoomId,RoomNumber,Description,PricePerNight,Status,UpdateDate,RoomTypeId")] Room room)
         {
             if (id != room.RoomId)
             {
@@ -97,7 +102,24 @@ namespace ResortTralaleritos.Controllers
             {
                 try
                 {
-                    _context.Update(room);
+                    // Obtener el registro original desde la base de datos
+                    var existingRoom = await _context.Rooms.FindAsync(id);
+
+                    if (existingRoom == null)
+                        return NotFound();
+
+                    // Actualizar SOLO los campos que sí deben cambiar
+                    existingRoom.RoomNumber = room.RoomNumber;
+                    existingRoom.Description = room.Description;
+                    existingRoom.PricePerNight = room.PricePerNight;
+                    existingRoom.Status = room.Status;
+                    existingRoom.UpdateDate = DateTime.Now;
+                    existingRoom.RoomTypeId = room.RoomTypeId;
+
+                    // NO actualizar RegistrationDate
+                    // existingService.RegistrationDate permanece igual
+
+                    _context.Update(existingRoom);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -113,6 +135,7 @@ namespace ResortTralaleritos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["RoomTypeId"] = new SelectList(_context.RoomTypes, "RoomTypeId", "Name", room.RoomTypeId);
             return View(room);
         }
 
@@ -125,6 +148,7 @@ namespace ResortTralaleritos.Controllers
             }
 
             var room = await _context.Rooms
+                .Include(r => r.RoomType)
                 .FirstOrDefaultAsync(m => m.RoomId == id);
             if (room == null)
             {

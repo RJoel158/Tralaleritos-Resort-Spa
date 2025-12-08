@@ -1,0 +1,68 @@
+﻿@model ResortTralaleritos.Models.ViewModels.PaymentRequestViewModel
+
+@{
+    ViewData["Title"] = "Solicitud de Pago";
+}
+
+<div class="header">
+    <h1>Payment Request / Receipt</h1>
+</div>
+
+<div class="controls">
+    <div>
+        <p><strong>Request Code:</strong> @Model.RequestCode</p>
+        <p><strong>Guest:</strong> @Model.GuestFullName</p>
+        <p><strong>Email:</strong> @Model.GuestEmail</p>
+        <p><strong>Check-In:</strong> @Model.CheckIn.ToShortDateString()</p>
+        <p><strong>Check-Out:</strong> @Model.CheckOut.ToShortDateString()</p>
+        <p><strong>Status:</strong> <span class="estado proximo">Pending</span></p>
+    </div>
+</div>
+
+<div class="table-container">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Room</th>
+                <th>Type</th>
+                <th>Price/Night</th>
+                <th>Nights</th>
+                <th>Subtotal</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var room in Model.RoomDetails)
+            {
+                <tr>
+                    <td>@room.RoomNumber</td>
+                    <td>@room.RoomType</td>
+                    <td>@room.PricePerNight.ToString("C")</td>
+                    <td>@room.Nights</td>
+                    <td>@room.Subtotal.ToString("C")</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="4" class="text-right">Total:</th>
+                <th>@Model.TotalAmount.ToString("C")</th>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="controls">
+    <a asp-controller="Reservations" asp-action="Index" class="btn-nuevo">Back to Reservations</a>
+</div>
+
+<style>
+    .estado.proximo {
+        background-color: #FFD76A;
+        color: #710013;
+        padding: 5px 12px;
+        border-radius: 15px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+</style>

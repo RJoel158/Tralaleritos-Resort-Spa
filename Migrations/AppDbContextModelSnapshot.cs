@@ -22,6 +22,142 @@ namespace ResortTralaleritos.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ReservationService", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ServiceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("ReservationService");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.PaymentRequest", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("CreatedByUserId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReservationId");
+
+                    b.ToTable("PaymentRequests");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.PaymentRequestItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PaymentRequestId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PaymentRequestId");
+
+                    b.ToTable("PaymentRequestItems");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.Reservation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("CheckInDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("CheckOutDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ClientId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
+
+                    b.ToTable("Reservations");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.ReservationRoom", b =>
+                {
+                    b.Property<int>("ReservationId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoomId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ReservationId", "RoomId");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("ReservationRooms");
+                });
+
             modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
                 {
                     b.Property<int>("RoomId")
@@ -30,24 +166,15 @@ namespace ResortTralaleritos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("RoomId"));
 
-                    b.Property<int>("Beds")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Capacity")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
-                    b.Property<bool>("IsAvailable")
-                        .HasColumnType("bit");
-
                     b.Property<decimal>("PricePerNight")
                         .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("RoomNumber")
                         .IsRequired()
@@ -60,7 +187,7 @@ namespace ResortTralaleritos.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime?>("UpdateDate")
                         .HasColumnType("datetime2");
 
                     b.HasKey("RoomId");
@@ -93,8 +220,14 @@ namespace ResortTralaleritos.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("UpdateDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("RoomTypeId");
 
@@ -109,38 +242,143 @@ namespace ResortTralaleritos.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ServiceId"));
 
+                    b.Property<decimal>("BaseCost")
+                        .HasColumnType("decimal(10,2)");
+
+                    b.Property<DateTime>("ClosingTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
+                        .HasMaxLength(150)
+                        .HasColumnType("nvarchar(150)");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int?>("RoomTypeId")
-                        .HasColumnType("int");
+                    b.Property<DateTime>("OpeningTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("ServiceId");
-
-                    b.HasIndex("RoomTypeId");
 
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("RoomService", b =>
+            modelBuilder.Entity("ResortTralaleritos.Models.User", b =>
                 {
-                    b.Property<int>("RoomsRoomId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int>("ServicesServiceId")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<string>("Password")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<DateTime>("RegistrationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("SecondLastName")
+                        .HasMaxLength(30)
+                        .HasColumnType("nvarchar(30)");
+
+                    b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.HasKey("RoomsRoomId", "ServicesServiceId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("ServicesServiceId");
+                    b.ToTable("Users");
+                });
 
-                    b.ToTable("RoomService");
+            modelBuilder.Entity("ReservationService", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.Reservation", "Reservation")
+                        .WithMany("ReservationServices")
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ResortTralaleritos.Models.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.PaymentRequest", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.Reservation", "Reservation")
+                        .WithMany()
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.PaymentRequestItem", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.PaymentRequest", "PaymentRequest")
+                        .WithMany("Items")
+                        .HasForeignKey("PaymentRequestId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PaymentRequest");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.Reservation", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.User", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.ReservationRoom", b =>
+                {
+                    b.HasOne("ResortTralaleritos.Models.Reservation", "Reservation")
+                        .WithMany("ReservationRooms")
+                        .HasForeignKey("ReservationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ResortTralaleritos.Models.Room", "Room")
+                        .WithMany("ReservationRooms")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Reservation");
+
+                    b.Navigation("Room");
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
@@ -154,32 +392,25 @@ namespace ResortTralaleritos.Migrations
                     b.Navigation("RoomType");
                 });
 
-            modelBuilder.Entity("ResortTralaleritos.Models.Service", b =>
+            modelBuilder.Entity("ResortTralaleritos.Models.PaymentRequest", b =>
                 {
-                    b.HasOne("ResortTralaleritos.Models.RoomType", null)
-                        .WithMany("DefaultServices")
-                        .HasForeignKey("RoomTypeId");
+                    b.Navigation("Items");
                 });
 
-            modelBuilder.Entity("RoomService", b =>
+            modelBuilder.Entity("ResortTralaleritos.Models.Reservation", b =>
                 {
-                    b.HasOne("ResortTralaleritos.Models.Room", null)
-                        .WithMany()
-                        .HasForeignKey("RoomsRoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ReservationRooms");
 
-                    b.HasOne("ResortTralaleritos.Models.Service", null)
-                        .WithMany()
-                        .HasForeignKey("ServicesServiceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Navigation("ReservationServices");
+                });
+
+            modelBuilder.Entity("ResortTralaleritos.Models.Room", b =>
+                {
+                    b.Navigation("ReservationRooms");
                 });
 
             modelBuilder.Entity("ResortTralaleritos.Models.RoomType", b =>
                 {
-                    b.Navigation("DefaultServices");
-
                     b.Navigation("Rooms");
                 });
 #pragma warning restore 612, 618
