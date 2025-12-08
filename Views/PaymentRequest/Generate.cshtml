@@ -1,49 +1,43 @@
-﻿@model ProyectoHotel.Models.ViewModels.PaymentRequestViewModel
+﻿@model ResortTralaleritos.Models.ViewModels.PaymentRequestViewModel
 
-<div style="max-width:700px; margin:auto; font-family:Arial;">
+@{
+    ViewData["Title"] = "Solicitud de Pago";
+}
 
-    <h2>Solicitud de Pago</h2>
-    <hr />
+<h2>Payment Request / Receipt</h2>
 
-    <h4>Código de Solicitud: <strong>@Model.RequestCode</strong></h4>
-    <p><strong>Reserva #:</strong> @Model.ReservationId</p>
+<p><strong>Request Code:</strong> @Model.RequestCode</p>
+<p><strong>GuestFullName:</strong> @Model.GuestFullName</p>
+<p><strong>Email:</strong> @Model.GuestEmail</p>
+<p><strong>Check-In:</strong> @Model.CheckIn.ToShortDateString()</p>
+<p><strong>Check-Out:</strong> @Model.CheckOut.ToShortDateString()</p>
 
-    <h3>Datos del Huésped</h3>
-    <p><strong>Nombre:</strong> @Model.GuestFullName</p>
-    <p><strong>Email:</strong> @Model.GuestEmail</p>
-
-    <h3>Detalles de la Estancia</h3>
-    <p><strong>Check-In:</strong> @Model.CheckIn.ToShortDateString()</p>
-    <p><strong>Check-Out:</strong> @Model.CheckOut.ToShortDateString()</p>
-
-    <h3>Habitaciones</h3>
-    <table width="100%" border="1" cellpadding="8" style="border-collapse:collapse;">
-        <tr style="background:#f0f0f0;">
-            <th>Habitación</th>
-            <th>Tipo</th>
-            <th>Precio/Noche</th>
-            <th>Noches</th>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Room</th>
+            <th>tType</th>
+            <th>Price/Night</th>
+            <th>Nights</th>
             <th>Subtotal</th>
         </tr>
-
+    </thead>
+    <tbody>
         @foreach (var room in Model.RoomDetails)
         {
             <tr>
                 <td>@room.RoomNumber</td>
                 <td>@room.RoomType</td>
-                <td>@room.PricePerNight</td>
+                <td>@room.PricePerNight.ToString("C")</td>
                 <td>@room.Nights</td>
-                <td>@room.Subtotal</td>
+                <td>@room.Subtotal.ToString("C")</td>
             </tr>
         }
-    </table>
-
-    <h2 style="text-align:right; margin-top:20px;">
-        Total: <strong>@Model.TotalAmount</strong>
-    </h2>
-
-    <hr />
-
-    <p>Este documento corresponde a la generación de una solicitud de pago previa al check-out.</p>
-
-</div>
+    </tbody>
+    <tfoot>
+        <tr>
+            <th colspan="4" class="text-right">Total:</th>
+            <th>@Model.TotalAmount.ToString("C")</th>
+        </tr>
+    </tfoot>
+</table>

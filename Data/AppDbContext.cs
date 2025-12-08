@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ResortTralaleritos.Models;
-using YourProjectNamespace.Models;
+using ResortTralaleritos.Models;
 
 namespace ResortTralaleritos.Data
 {
