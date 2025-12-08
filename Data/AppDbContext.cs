@@ -19,6 +19,11 @@ namespace ResortTralaleritos.Data
         public DbSet<ReservationRoom> ReservationRooms { get; set; }
         public DbSet<PaymentRequest> PaymentRequests { get; set; }
         public DbSet<PaymentRequestItem> PaymentRequestItems { get; set; }
+        
+        // From Mauri's branch: CheckIns and Audit
+        public DbSet<CheckIn> CheckIns { get; set; }
+        public DbSet<Guest> Guests { get; set; }
+        public DbSet<RoomAuditLog> RoomAuditLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

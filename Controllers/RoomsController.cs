@@ -7,23 +7,64 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ResortTralaleritos.Data;
 using ResortTralaleritos.Models;
+using ResortTralaleritos.Services;
 
 namespace ResortTralaleritos.Controllers
 {
     public class RoomsController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IRoomService _roomService;
 
-        public RoomsController(AppDbContext context)
+        public RoomsController(AppDbContext context, IRoomService roomService)
         {
             _context = context;
+            _roomService = roomService;
         }
 
         // GET: Rooms
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Rooms.Include(r => r.RoomType);
-            return View(await appDbContext.ToListAsync());
+            return RedirectToAction(nameof(Search));
+        }
+
+        /// <summary>
+        /// GET: Rooms/Search - Advanced room search with filters
+        /// </summary>
+        public async Task<IActionResult> Search(string? roomNumber, string? roomType, RoomStatus? status,
+            decimal? minPrice, decimal? maxPrice, int? minCapacity, bool? isAvailable,
+            int pageNumber = 1, string sortBy = "RoomNumber", bool sortDescending = false)
+        {
+            var filter = new RoomFilterDto
+            {
+                RoomNumber = roomNumber,
+                RoomType = roomType,
+                Status = status,
+                MinPrice = minPrice,
+                MaxPrice = maxPrice,
+                MinCapacity = minCapacity,
+                IsAvailable = isAvailable,
+                PageNumber = pageNumber,
+                SortBy = sortBy,
+                SortDescending = sortDescending
+            };
+
+            var (rooms, totalCount) = await _roomService.SearchRoomsAsync(filter);
+
+            // Prepare data for view
+            var roomTypes = await _context.RoomTypes.Select(rt => rt.Name).Distinct().ToListAsync();
+            ViewBag.RoomTypes = new SelectList(roomTypes, selectedValue: roomType);
+            ViewBag.Statuses = Enum.GetValues(typeof(RoomStatus))
+                .Cast<RoomStatus>()
+                .ToList();
+
+            // Save current filters in ViewBag
+            ViewBag.CurrentFilter = filter;
+            ViewBag.TotalCount = totalCount;
+            ViewBag.TotalPages = (int)Math.Ceiling(totalCount / (double)filter.PageSize);
+            ViewBag.CurrentPage = pageNumber;
+
+            return View(rooms);
         }
 
         // GET: Rooms/Details/5
@@ -176,6 +217,28 @@ namespace ResortTralaleritos.Controllers
         private bool RoomExists(int id)
         {
             return _context.Rooms.Any(e => e.RoomId == id);
+        }
+
+        /// <summary>
+        /// GET: Rooms/AuditHistory/5 - Show audit history for a room
+        /// </summary>
+        public async Task<IActionResult> AuditHistory(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var room = await _roomService.GetRoomByIdAsync(id.Value);
+            if (room == null)
+            {
+                return NotFound();
+            }
+
+            var auditLogs = await _roomService.GetRoomAuditHistoryAsync(id.Value);
+
+            ViewBag.Room = room;
+            return View(auditLogs);
         }
     }
 }

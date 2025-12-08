@@ -1,0 +1,145 @@
+@{
+    ViewData["Title"] = "Registrar Nuevo Check-In";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h5 class="mb-0">
+                        <i class="bi bi-person-plus"></i> Registrar Nuevo Check-In
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="New" method="post">
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger"></div>
+
+                        <h6 class="mb-3 fw-bold text-primary">
+                            <i class="bi bi-person-lines-fill"></i> Datos del Huésped
+                        </h6>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="guest_FirstName" class="form-label fw-bold">Nombre</label>
+                                    <input type="text" id="guest_FirstName" name="guest.FirstName" class="form-control" 
+                                           required placeholder="Ej: Juan">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="guest_LastName" class="form-label fw-bold">Apellido</label>
+                                    <input type="text" id="guest_LastName" name="guest.LastName" class="form-control" 
+                                           required placeholder="Ej: Pérez">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="guest_Email" class="form-label fw-bold">Correo Electrónico</label>
+                                    <input type="email" id="guest_Email" name="guest.Email" class="form-control" 
+                                           placeholder="correo@ejemplo.com">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="guest_PhoneNumber" class="form-label fw-bold">Teléfono</label>
+                                    <input type="tel" id="guest_PhoneNumber" name="guest.PhoneNumber" class="form-control" 
+                                           required placeholder="Ej: +506 8765 4321">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="guest_IdentificationType" class="form-label fw-bold">Tipo de Identificación</label>
+                                    <select id="guest_IdentificationType" name="guest.IdentificationType" class="form-select" required>
+                                        <option value="">Seleccionar...</option>
+                                        <option value="Cédula">Cédula</option>
+                                        <option value="Pasaporte">Pasaporte</option>
+                                        <option value="Licencia">Licencia de Conducir</option>
+                                        <option value="Otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="guest_IdentificationNumber" class="form-label fw-bold">Número de Identificación</label>
+                                    <input type="text" id="guest_IdentificationNumber" name="guest.IdentificationNumber" class="form-control" 
+                                           required placeholder="Ej: 1234567890">
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-4">
+
+                        <h6 class="mb-3 fw-bold text-primary">
+                            <i class="bi bi-door-closed"></i> Datos del Check-In
+                        </h6>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="checkIn_CheckInDate" class="form-label fw-bold">Fecha de Check-In</label>
+                                    <input type="date" id="checkIn_CheckInDate" name="checkIn.CheckInDate" class="form-control" 
+                                           required value="@DateTime.Now.ToString("yyyy-MM-dd")">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="checkIn_CheckInTime" class="form-label fw-bold">Hora de Check-In</label>
+                                    <input type="time" id="checkIn_CheckInTime" name="checkIn.CheckInTime" class="form-control" 
+                                           required value="@DateTime.Now.ToString("HH:mm")">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="checkIn_RoomId" class="form-label fw-bold">Habitación</label>
+                            <select id="checkIn_RoomId" name="checkIn.RoomId" class="form-select" required>
+                                <option value="">Seleccionar habitación disponible...</option>
+                                @if (ViewBag.AvailableRooms != null)
+                                {
+                                    @foreach (var room in ViewBag.AvailableRooms)
+                                    {
+                                        <option value="@room.RoomId">
+                                            Habitación @room.RoomNumber - @room.RoomType.Name ($@room.PricePerNight)
+                                        </option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="checkIn_Notes" class="form-label fw-bold">Notas (Opcional)</label>
+                            <textarea id="checkIn_Notes" name="checkIn.Notes" class="form-control" rows="3" 
+                                      placeholder="Información adicional sobre el check-in..."></textarea>
+                        </div>
+
+                        <div class="alert alert-info" role="alert">
+                            <i class="bi bi-info-circle"></i>
+                            <strong>Información:</strong> Al confirmar este check-in, la habitación será marcada como ocupada automáticamente.
+                        </div>
+
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-check-circle"></i> Confirmar Check-In
+                            </button>
+                            <a asp-action="Index" class="btn btn-secondary">
+                                <i class="bi bi-x-circle"></i> Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
