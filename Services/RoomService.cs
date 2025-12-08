@@ -66,16 +66,10 @@ namespace ResortTralaleritos.Services
                 query = query.Where(r => r.PricePerNight <= filter.MaxPrice.Value);
             }
 
-            // Aplicar filtro por capacidad mínima
+            // Aplicar filtro por capacidad mínima (usando RoomType.DefaultCapacity)
             if (filter.MinCapacity.HasValue)
             {
-                query = query.Where(r => r.Capacity >= filter.MinCapacity.Value);
-            }
-
-            // Aplicar filtro por disponibilidad
-            if (filter.IsAvailable.HasValue)
-            {
-                query = query.Where(r => r.IsAvailable == filter.IsAvailable.Value);
+                query = query.Where(r => r.RoomType != null && r.RoomType.DefaultCapacity >= filter.MinCapacity.Value);
             }
 
             // Obtener el total de registros antes de paginar
@@ -89,8 +83,8 @@ namespace ResortTralaleritos.Services
                     : query.OrderBy(r => r.PricePerNight),
                 
                 "capacity" => filter.SortDescending 
-                    ? query.OrderByDescending(r => r.Capacity) 
-                    : query.OrderBy(r => r.Capacity),
+                    ? query.OrderByDescending(r => r.RoomType != null ? r.RoomType.DefaultCapacity : 0) 
+                    : query.OrderBy(r => r.RoomType != null ? r.RoomType.DefaultCapacity : 0),
                 
                 _ => filter.SortDescending 
                     ? query.OrderByDescending(r => r.RoomNumber) 
@@ -112,7 +106,7 @@ namespace ResortTralaleritos.Services
         public async Task<Room?> GetRoomByIdAsync(int roomId)
         {
             return await _context.Rooms
-                .Include(r => r.AuditLogs)
+                .Include(r => r.RoomType)
                 .FirstOrDefaultAsync(r => r.RoomId == roomId);
         }
 
@@ -155,14 +149,6 @@ namespace ResortTralaleritos.Services
                     room.Status.ToString(), updatedRoom.Status.ToString(), ipAddress: ipAddress);
             }
 
-            if (room.Capacity != updatedRoom.Capacity || room.Beds != updatedRoom.Beds)
-            {
-                await LogAuditAsync(roomId, "Update", modifiedBy, "Capacidad y Camas", 
-                    $"Cap: {room.Capacity}, Camas: {room.Beds}", 
-                    $"Cap: {updatedRoom.Capacity}, Camas: {updatedRoom.Beds}", 
-                    ipAddress: ipAddress);
-            }
-
             if (room.Description != updatedRoom.Description)
             {
                 await LogAuditAsync(roomId, "Update", modifiedBy, nameof(Room.Description), 
@@ -171,15 +157,11 @@ namespace ResortTralaleritos.Services
 
             // Actualizar la habitación
             room.RoomNumber = updatedRoom.RoomNumber;
-            room.RoomType = updatedRoom.RoomType;
+            room.RoomTypeId = updatedRoom.RoomTypeId;
             room.Description = updatedRoom.Description;
-            room.Capacity = updatedRoom.Capacity;
-            room.Beds = updatedRoom.Beds;
             room.PricePerNight = updatedRoom.PricePerNight;
-            room.IsAvailable = updatedRoom.IsAvailable;
             room.Status = updatedRoom.Status;
-            room.UpdatedAt = DateTime.Now;
-            room.ModifiedBy = modifiedBy;
+            room.UpdateDate = DateTime.Now;
 
             _context.Update(room);
             await _context.SaveChangesAsync();
@@ -194,8 +176,7 @@ namespace ResortTralaleritos.Services
         {
             ValidateRoomData(room);
 
-            room.CreatedBy = createdBy;
-            room.CreatedAt = DateTime.Now;
+            room.RegistrationDate = DateTime.Now;
 
             _context.Add(room);
             await _context.SaveChangesAsync();
@@ -255,12 +236,6 @@ namespace ResortTralaleritos.Services
 
             if (room.PricePerNight < 0)
                 throw new ArgumentException("El precio no puede ser negativo");
-
-            if (room.Capacity < 1 || room.Capacity > 10)
-                throw new ArgumentException("La capacidad debe estar entre 1 y 10");
-
-            if (room.Beds < 0 || room.Beds > 10)
-                throw new ArgumentException("El número de camas debe estar entre 0 y 10");
 
             // Validar que el tipo de habitación existe
             var roomTypeExists = _context.RoomTypes.Any(rt => rt.RoomTypeId == room.RoomTypeId);

@@ -31,9 +31,6 @@ namespace ResortTralaleritos.Models
         [Range(1, 10)]
         public int? MinCapacity { get; set; }
 
-        // Filtro por disponibilidad
-        public bool? IsAvailable { get; set; }
-
         // Número de página para paginación
         [Range(1, int.MaxValue)]
         public int PageNumber { get; set; } = 1;

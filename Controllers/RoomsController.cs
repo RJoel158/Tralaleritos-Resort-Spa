@@ -32,7 +32,7 @@ namespace ResortTralaleritos.Controllers
         /// GET: Rooms/Search - Advanced room search with filters
         /// </summary>
         public async Task<IActionResult> Search(string? roomNumber, string? roomType, RoomStatus? status,
-            decimal? minPrice, decimal? maxPrice, int? minCapacity, bool? isAvailable,
+            decimal? minPrice, decimal? maxPrice, int? minCapacity,
             int pageNumber = 1, string sortBy = "RoomNumber", bool sortDescending = false)
         {
             var filter = new RoomFilterDto
@@ -43,7 +43,6 @@ namespace ResortTralaleritos.Controllers
                 MinPrice = minPrice,
                 MaxPrice = maxPrice,
                 MinCapacity = minCapacity,
-                IsAvailable = isAvailable,
                 PageNumber = pageNumber,
                 SortBy = sortBy,
                 SortDescending = sortDescending

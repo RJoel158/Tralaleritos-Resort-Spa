@@ -56,7 +56,7 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <p class="mb-2"><strong>Usuario:</strong> @log.ModifiedBy</p>
+                                            <p class="mb-2"><strong>Usuario:</strong> @(log.ModifiedBy ?? "Sistema")</p>
                                             @if (!string.IsNullOrEmpty(log.IpAddress))
                                             {
                                                 <p class="mb-2"><strong>IP:</strong> <code>@log.IpAddress</code></p>

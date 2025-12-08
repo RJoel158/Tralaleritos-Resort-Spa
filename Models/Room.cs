@@ -32,7 +32,7 @@ namespace ResortTralaleritos.Models
         [DataType(DataType.Date)]
         [Display(Name = "Registration Date")]
         public DateTime RegistrationDate { get; set; } = DateTime.Now;
-        
+
         [DataType(DataType.Date)]
         [Display(Name = "Update Date")]
         public DateTime? UpdateDate { get; set; }
@@ -43,7 +43,9 @@ namespace ResortTralaleritos.Models
 
         public RoomType? RoomType { get; set; }
 
+        // Navigation properties
         public ICollection<ReservationRoom> ReservationRooms { get; set; } = new List<ReservationRoom>();
+        public ICollection<RoomAuditLog> AuditLogs { get; set; } = new List<RoomAuditLog>();
 
         //public ICollection<Reservation> Reservations { get; set; } = new List<Reservation>();
     }

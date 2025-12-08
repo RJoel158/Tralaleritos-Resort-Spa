@@ -54,8 +54,8 @@ namespace ResortTralaleritos.Controllers
         // GET: CheckIns/New
         public async Task<IActionResult> New()
         {
-            // Obtener habitaciones disponibles
-            var filter = new RoomFilterDto { IsAvailable = true, PageSize = 100 };
+            // Obtener habitaciones disponibles (Status = Available)
+            var filter = new RoomFilterDto { Status = RoomStatus.Available, PageSize = 100 };
             var (availableRooms, _) = await _checkInService.SearchAvailableRoomsAsync(filter);
 
             ViewBag.AvailableRooms = availableRooms;
@@ -74,7 +74,7 @@ namespace ResortTralaleritos.Controllers
                 // Validar datos del huésped
                 if (!ModelState.IsValid)
                 {
-                    var filter = new RoomFilterDto { IsAvailable = true, PageSize = 100 };
+                    var filter = new RoomFilterDto { Status = RoomStatus.Available, PageSize = 100 };
                     var (availableRooms, _) = await _checkInService.SearchAvailableRoomsAsync(filter);
                     ViewBag.AvailableRooms = availableRooms;
                     return View(new { Guest = guest, CheckIn = checkIn });
@@ -96,7 +96,7 @@ namespace ResortTralaleritos.Controllers
             catch (InvalidOperationException ex)
             {
                 ModelState.AddModelError("", ex.Message);
-                var filter = new RoomFilterDto { IsAvailable = true, PageSize = 100 };
+                var filter = new RoomFilterDto { Status = RoomStatus.Available, PageSize = 100 };
                 var (availableRooms, _) = await _checkInService.SearchAvailableRoomsAsync(filter);
                 ViewBag.AvailableRooms = availableRooms;
                 return View(new { Guest = guest, CheckIn = checkIn });
@@ -127,7 +127,7 @@ namespace ResortTralaleritos.Controllers
             var filter = new RoomFilterDto 
             { 
                 RoomType = term,
-                IsAvailable = true,
+                Status = RoomStatus.Available,
                 PageSize = 20 
             };
 

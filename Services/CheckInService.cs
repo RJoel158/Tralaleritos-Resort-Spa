@@ -135,9 +135,8 @@ namespace ResortTralaleritos.Services
                 // Agregar check-in
                 _context.CheckIns.Add(checkIn);
 
-                // Actualizar estado de la habitación a "Ocupada" (1)
-                room.Status = (RoomStatus)1; // Ocupada
-                room.IsAvailable = false;
+                // Actualizar estado de la habitación a "Ocupada"
+                room.Status = RoomStatus.Occupied;
                 _context.Rooms.Update(room);
 
                 await _context.SaveChangesAsync();
@@ -153,7 +152,7 @@ namespace ResortTralaleritos.Services
         {
             return await _context.Rooms
                 .Include(r => r.RoomType)
-                .FirstOrDefaultAsync(r => r.RoomId == roomId && r.IsAvailable == true);
+                .FirstOrDefaultAsync(r => r.RoomId == roomId && r.Status == RoomStatus.Available);
         }
 
         public async Task UpdateRoomStatusAsync(int roomId, int status)
@@ -162,7 +161,6 @@ namespace ResortTralaleritos.Services
             if (room != null)
             {
                 room.Status = (RoomStatus)status;
-                room.IsAvailable = (status == 0); // Solo disponible si está en estado 0
                 _context.Rooms.Update(room);
                 await _context.SaveChangesAsync();
             }
@@ -172,7 +170,7 @@ namespace ResortTralaleritos.Services
         {
             var query = _context.Rooms
                 .Include(r => r.RoomType)
-                .Where(r => r.IsAvailable == true)
+                .Where(r => r.Status == RoomStatus.Available)
                 .AsQueryable();
 
             // Filtrar por tipo de habitación

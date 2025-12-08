@@ -19,7 +19,7 @@ namespace ResortTralaleritos.Data
         public DbSet<ReservationRoom> ReservationRooms { get; set; }
         public DbSet<PaymentRequest> PaymentRequests { get; set; }
         public DbSet<PaymentRequestItem> PaymentRequestItems { get; set; }
-        
+
         // From Mauri's branch: CheckIns and Audit
         public DbSet<CheckIn> CheckIns { get; set; }
         public DbSet<Guest> Guests { get; set; }
@@ -39,6 +39,13 @@ namespace ResortTralaleritos.Data
                 .HasOne(rr => rr.Room)
                 .WithMany(r => r.ReservationRooms)
                 .HasForeignKey(rr => rr.RoomId);
+
+            // Configure Room -> RoomAuditLog relationship
+            modelBuilder.Entity<RoomAuditLog>()
+                .HasOne(a => a.Room)
+                .WithMany(r => r.AuditLogs)
+                .HasForeignKey(a => a.RoomId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

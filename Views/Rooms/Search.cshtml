@@ -62,14 +62,9 @@
                             </select>
                         </div>
 
-                        <!-- Disponibilidad -->
+                        <!-- Este filtro ya no es necesario, el estado incluye disponibilidad -->
                         <div class="col-md-3">
-                            <label for="isAvailable" class="form-label">Disponibilidad</label>
-                            <select class="form-select" id="isAvailable" name="isAvailable">
-                                <option value="">-- Seleccionar --</option>
-                                <option value="true" selected="@(filter.IsAvailable == true)">Disponible</option>
-                                <option value="false" selected="@(filter.IsAvailable == false)">No Disponible</option>
-                            </select>
+                            <!-- Espacio reservado -->
                         </div>
 
                         <!-- Precio Mínimo -->
@@ -164,23 +159,23 @@
                                     {
                                         <tr>
                                             <td>@room.RoomNumber</td>
-                                            <td>@room.RoomType</td>
-                                            <td>${@room.PricePerNight}</td>
-                                            <td>@room.Capacity</td>
-                                            <td>@room.Beds</td>
+                                            <td>@(room.RoomType?.Name ?? "N/A")</td>
+                                            <td>$@room.PricePerNight</td>
+                                            <td>@(room.RoomType?.DefaultCapacity ?? 0)</td>
+                                            <td>@(room.RoomType?.DefaultBeds ?? 0)</td>
                                             <td>
                                                 <span class="badge bg-@GetStatusBadgeColor(room.Status)">
                                                     @room.Status
                                                 </span>
                                             </td>
                                             <td>
-                                                @if (room.IsAvailable)
+                                                @if (room.Status == ResortTralaleritos.Models.RoomStatus.Available)
                                                 {
-                                                    <span class="badge bg-success">Sí</span>
+                                                    <span class="badge bg-success">Disponible</span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="badge bg-danger">No</span>
+                                                    <span class="badge bg-warning">@room.Status</span>
                                                 }
                                             </td>
                                             <td>
