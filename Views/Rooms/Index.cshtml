@@ -1,71 +1,77 @@
-﻿@model IEnumerable<ResortTralaleritos.Models.Room>
+﻿    @model IEnumerable<ResortTralaleritos.Models.Room>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Rooms";
 }
 
-<h1>Index</h1>
+<div class="header">
+    <h1>Rooms</h1>
+    <p>Manage all the room inventory</p>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PricePerNight)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RegistrationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RoomType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PricePerNight)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RegistrationDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RoomType.Name)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.RoomId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.RoomId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.RoomId">Delete</a>
-            </td>
-        </tr>
+<div class="controls">
+    <div></div>
+    <a asp-action="Create" class="btn-nuevo">Create New</a>
+</div>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Description</th>
+                <th>Price Per Night</th>
+                <th>Status</th>
+                <th>Registration Date</th>
+                <th>Room Type</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        <strong>@Html.DisplayFor(modelItem => item.RoomNumber)</strong>
+                    </td>
+                    <td>
+                        <span class="descripcion">@Html.DisplayFor(modelItem => item.Description)</span>
+                    </td>
+                    <td>
+                        <strong class="porcentaje">$@Html.DisplayFor(modelItem => item.PricePerNight)</strong>
+                    </td>
+                    <td>
+                        <span class="estado @GetStatusClass(item.Status)">
+                            @Html.DisplayFor(modelItem => item.Status)
+                        </span>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RegistrationDate)
+                    </td>
+                    <td>
+                        <strong>@Html.DisplayFor(modelItem => item.RoomType.Name)</strong>
+                    </td>
+                    <td class="acciones">
+                        <a asp-action="Edit" asp-route-id="@item.RoomId" class="btn-editar">Edit</a>
+                        <a asp-action="Details" asp-route-id="@item.RoomId" class="btn-detalles">Details</a>
+                        <a asp-action="Delete" asp-route-id="@item.RoomId" class="btn-eliminar">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@functions {
+    private string GetStatusClass(ResortTralaleritos.Models.RoomStatus status)
+    {
+        return status switch
+        {
+            ResortTralaleritos.Models.RoomStatus.Available => "activo",
+            ResortTralaleritos.Models.RoomStatus.Occupied => "expirado",
+            ResortTralaleritos.Models.RoomStatus.Cleaning => "proximo",
+            ResortTralaleritos.Models.RoomStatus.Maintenance => "inactivo",
+            ResortTralaleritos.Models.RoomStatus.Reserved => "proximo",
+            _ => "inactivo"
+        };
+    }
 }
-    </tbody>
-</table>

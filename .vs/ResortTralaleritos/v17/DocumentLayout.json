@@ -3,6 +3,22 @@
   "WorkspaceRootPath": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|c:\\users\\asus\\onedrive - universidad privada del valle\\escritorio\\tralaleritos-resort-spa\\views\\rooms\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\rooms\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|c:\\users\\asus\\onedrive - universidad privada del valle\\escritorio\\tralaleritos-resort-spa\\views\\rooms\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\rooms\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Migrations\\20251208203756_all.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20251208203756_all.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|c:\\users\\asus\\onedrive - universidad privada del valle\\escritorio\\tralaleritos-resort-spa\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|c:\\users\\asus\\onedrive - universidad privada del valle\\escritorio\\tralaleritos-resort-spa\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
@@ -62,10 +78,6 @@
       "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:views\\reservations\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|c:\\users\\asus\\onedrive - universidad privada del valle\\escritorio\\tralaleritos-resort-spa\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|c:\\users\\asus\\onedrive - universidad privada del valle\\escritorio\\tralaleritos-resort-spa\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{154FE895-C370-48F5-9BD6-DC603122A9EE}|ResortTralaleritos.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -89,11 +101,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 14,
               "Title": "StyleSheet.css",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\wwwroot\\css\\StyleSheet.css",
               "RelativeDocumentMoniker": "wwwroot\\css\\StyleSheet.css",
@@ -102,11 +114,12 @@
               "ViewState": "AgIAADIAAAAAAAAAAAAAAEQAAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2025-11-30T02:07:58.322Z",
-              "IsPinned": true
+              "IsPinned": true,
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 13,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "Views\\Shared\\_Layout.cshtml",
@@ -115,19 +128,7 @@
               "ViewState": "AgIAACEBAAAAAAAAAAAcwDkBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-11-28T02:42:58.133Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\appsettings.json*",
-              "RelativeToolTip": "appsettings.json*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAABNAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-12-08T20:19:38.854Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
@@ -136,19 +137,58 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Reservation.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Reservation.cs",
-              "RelativeDocumentMoniker": "Models\\Reservation.cs",
-              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Reservation.cs",
-              "RelativeToolTip": "Models\\Reservation.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAA8wDEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T00:48:58.55Z"
+              "DocumentIndex": 0,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Rooms\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Index.cshtml*",
+              "RelativeToolTip": "Views\\Rooms\\Index.cshtml*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T20:45:22.257Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Search.cshtml",
+              "RelativeDocumentMoniker": "Views\\Rooms\\Search.cshtml",
+              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\Rooms\\Search.cshtml*",
+              "RelativeToolTip": "Views\\Rooms\\Search.cshtml*",
+              "ViewState": "AgIAABMAAAAAAAAAAAAmwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-12-08T20:44:07.796Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "20251208203756_all.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Migrations\\20251208203756_all.cs",
+              "RelativeDocumentMoniker": "Migrations\\20251208203756_all.cs",
+              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Migrations\\20251208203756_all.cs",
+              "RelativeToolTip": "Migrations\\20251208203756_all.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:37:56.851Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-12-08T20:19:38.854Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Service.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Service.cs",
               "RelativeDocumentMoniker": "Models\\Service.cs",
@@ -160,7 +200,32 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
+              "Title": "Room.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Room.cs",
+              "RelativeDocumentMoniker": "Models\\Room.cs",
+              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Room.cs",
+              "RelativeToolTip": "Models\\Room.cs",
+              "ViewState": "AgIAAEQAAAAAAAAAAAAowFMAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T00:49:05.412Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Reservation.cs",
+              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Reservation.cs",
+              "RelativeDocumentMoniker": "Models\\Reservation.cs",
+              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Reservation.cs",
+              "RelativeToolTip": "Models\\Reservation.cs",
+              "ViewState": "AgIAACYAAAAAAAAAAAA8wDEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-02T00:48:58.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "Generate.cshtml",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\PaymentRequest\\Generate.cshtml",
               "RelativeDocumentMoniker": "Views\\PaymentRequest\\Generate.cshtml",
@@ -173,7 +238,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 9,
               "Title": "AppDbContext.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Data\\AppDbContext.cs",
               "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
@@ -185,7 +250,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "PaymentRequestViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\ViewModels\\PaymentRequestViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ViewModels\\PaymentRequestViewModel.cs",
@@ -197,7 +262,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 10,
               "Title": "PaymentRequestController.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Controllers\\PaymentRequestController.cs",
               "RelativeDocumentMoniker": "Controllers\\PaymentRequestController.cs",
@@ -209,7 +274,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 12,
               "Title": "ErrorViewModel.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\ErrorViewModel.cs",
               "RelativeDocumentMoniker": "Models\\ErrorViewModel.cs",
@@ -221,7 +286,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 11,
               "Title": "PaymentRequest.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\PaymentRequest.cs",
               "RelativeDocumentMoniker": "Models\\PaymentRequest.cs",
@@ -233,7 +298,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 15,
               "Title": "ReservationService.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\ReservationService.cs",
               "RelativeDocumentMoniker": "Models\\ReservationService.cs",
@@ -245,7 +310,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 16,
               "Title": "20251208021745_AddServicesRequestPayment.cs",
               "DocumentMoniker": "F:\\proyecto software\\Tralaleritos-Resort-Spa\\Migrations\\20251208021745_AddServicesRequestPayment.cs",
               "ToolTip": "F:\\proyecto software\\Tralaleritos-Resort-Spa\\Migrations\\20251208021745_AddServicesRequestPayment.cs",
@@ -255,7 +320,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 17,
               "Title": "ReservationRoom.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\ReservationRoom.cs",
               "RelativeDocumentMoniker": "Models\\ReservationRoom.cs",
@@ -267,7 +332,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 18,
               "Title": "Index.cshtml",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\Reservations\\Index.cshtml",
               "RelativeDocumentMoniker": "Views\\Reservations\\Index.cshtml",
@@ -279,7 +344,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 19,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\User.cs",
               "RelativeDocumentMoniker": "Models\\User.cs",
@@ -291,19 +356,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Room.cs",
-              "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Room.cs",
-              "RelativeDocumentMoniker": "Models\\Room.cs",
-              "ToolTip": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\Room.cs",
-              "RelativeToolTip": "Models\\Room.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAQwDsAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-02T00:49:05.412Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 20,
               "Title": "RoomType.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Models\\RoomType.cs",
               "RelativeDocumentMoniker": "Models\\RoomType.cs",
@@ -315,7 +368,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 21,
               "Title": "ReservationsController.cs",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Controllers\\ReservationsController.cs",
               "RelativeDocumentMoniker": "Controllers\\ReservationsController.cs",
@@ -327,7 +380,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 22,
               "Title": "Edit.cshtml",
               "DocumentMoniker": "C:\\Users\\ASUS\\OneDrive - Universidad Privada del Valle\\Escritorio\\Tralaleritos-Resort-Spa\\Views\\Reservations\\Edit.cshtml",
               "RelativeDocumentMoniker": "Views\\Reservations\\Edit.cshtml",

@@ -43,6 +43,30 @@ namespace ResortTralaleritos.Models
 
         public RoomType? RoomType { get; set; }
 
+        // Propiedades adicionales que faltaban
+        [Display(Name = "Number of Beds")]
+        public int Beds { get; set; }
+
+        [Display(Name = "Capacity")]
+        public int Capacity { get; set; }
+
+        [Display(Name = "Is Available")]
+        public bool IsAvailable => Status == RoomStatus.Available;
+
+        [Display(Name = "Created At")]
+        public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        [Display(Name = "Created By")]
+        [StringLength(100)]
+        public string? CreatedBy { get; set; }
+
+        [Display(Name = "Modified By")]
+        [StringLength(100)]
+        public string? ModifiedBy { get; set; }
+
+        [Display(Name = "Updated At")]
+        public DateTime? UpdatedAt { get; set; }
+
         // Navigation properties
         public ICollection<ReservationRoom> ReservationRooms { get; set; } = new List<ReservationRoom>();
         public ICollection<RoomAuditLog> AuditLogs { get; set; } = new List<RoomAuditLog>();
